@@ -5,18 +5,22 @@ import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.math.Rectangle;
 import com.vfive.game.Main;
 import com.vfive.game.Tools.Joystick;
 import com.vfive.game.Tools.Point2D;
 import com.vfive.game.actors.Player;
+import com.vfive.game.actors.WorldObj;
 
 public class GameSc implements Screen {
 
     MenuSc menu;
     Joystick joystick;
     Player player;
+    WorldObj book, rectText;
+    Rectangle rectBook, rectangle;
 
-    public GameSc(MenuSc menu){
+    public GameSc(MenuSc menu) {
         this.menu = menu;
     }
 
@@ -70,29 +74,48 @@ public class GameSc implements Screen {
             }
         });
         loadActor();
+
+        rectBook = new Rectangle();
+        rectBook.setX(book.getX());
+        rectBook.setY(book.getY());
+        rectBook.setWidth(book.getWidth());
+        rectBook.setHeight(book.getHeight());
+
+        rectangle = new Rectangle();
+        rectangle.setX(rectText.getX());
+        rectangle.setY(rectText.getY());
+        rectangle.setWidth(rectText.getWidth());
+        rectangle.setHeight(rectText.getHeight());
     }
 
-    public void loadActor(){
+    public void loadActor() {
         // привязывает изображения из assets к обьектам
-        joystick = new Joystick(Main.circle,
-                Main.actor,
-                new Point2D(Main.WIDTH / 10 * 9,
-                        Main.HEIGHT / 10 * 2),
-                Main.HEIGHT / 3);
-        player = new Player(Main.human, new Point2D(Main.WIDTH / 2, Main.HEIGHT / 2), 10, Main.HEIGHT / 5);
+        joystick = new Joystick(Main.circle, Main.actor, new Point2D(Main.WIDTH / 10 * 9, Main.HEIGHT / 10 * 2), Main.HEIGHT / 3);
+        player = new Player(Main.human, new Point2D(Main.WIDTH / 6, Main.HEIGHT / 6), 10, Main.HEIGHT / 2);
+        book = new WorldObj(Main.book, new Point2D(Main.WIDTH / 10 * 8, Main.HEIGHT / 10 * 7), Main.book.getWidth(), Main.book.getHeight());
+        rectText = new WorldObj(Main.rectText, new Point2D(Main.WIDTH / 2, Main.HEIGHT / 2), Main.WIDTH / 10 * 8, Main.HEIGHT / 10 * 3);
     }
 
-    public void gameUpdate(){
+    public void gameUpdate() {
         // устанавливает на player джостик
         player.setDirection(joystick.getDir());
         player.update();
     }
 
-    public void gameRender(SpriteBatch batch){
+    public void gameRender(SpriteBatch batch) {
         // отрисовывает всех
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         player.draw(batch);
         joystick.draw(batch);
+        book.draw(batch);
+
+        //две проверки пересечения
+        if (rectBook.overlaps(rectangle)) {
+            rectText.draw(batch);
+        }
+        if (book.collides(rectangle)){
+            rectText.draw(batch);
+        }
     }
 
     @Override
@@ -129,10 +152,9 @@ public class GameSc implements Screen {
 
     }
 
-    public void touch(float x, float y , boolean isTouch, int pointer){
+    public void touch(float x, float y, boolean isTouch, int pointer) {
         for (int i = 0; i < 5; i++) {
             joystick.update(x, y, isTouch, pointer);
-
         }
     }
 }

@@ -13,7 +13,7 @@ public class Main extends Game  {
 	public static SpriteBatch batch;
 	public static int WIDTH;
 	public static int HEIGHT;
-	public static Texture circle, actor, btnPlay, background, human;
+	public static Texture circle, actor, btnPlay, background, human, book, rectText;
 
 	
 	@Override
@@ -26,7 +26,18 @@ public class Main extends Game  {
 		btnPlay = new Texture("btn_play2.jpg");
 		background = new Texture("room.jpg");
 		human = new Texture("human3.png");
+		book = new Texture("book.png");
+		rectText = new Texture("rect_text.jpg");
 		setScreen(new MenuSc(this));
+	}
+
+	public static float getObjectRadius(Texture object){
+		float radius = 0;
+		if (object.getWidth() > object.getHeight())
+			radius = object.getWidth();
+		if (object.getWidth() < object.getHeight())
+			radius = object.getHeight();
+		return radius;
 	}
 	
 	@Override

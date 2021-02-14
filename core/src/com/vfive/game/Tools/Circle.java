@@ -27,7 +27,6 @@ public class Circle {
         float radiusSum = circle.radius + radius;
         boolean isOverlaps = distance < radiusSum * radiusSum;
         return isOverlaps;
-
     }
 
 }

@@ -25,7 +25,6 @@ public class MenuSc extends Game implements Screen {
 
     @Override
     public void show() {
-
     }
 
     @Override

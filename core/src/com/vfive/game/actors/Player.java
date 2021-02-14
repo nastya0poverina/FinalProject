@@ -3,21 +3,23 @@ package com.vfive.game.actors;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.math.Rectangle;
 import com.vfive.game.Main;
 import com.vfive.game.Tools.Point2D;
 
 public class Player extends Actor {
 
+    private Rectangle bounds;
+
     public Player(Texture img, Point2D position, float speed, float radius) {
         super(img, position, speed, radius);
+        bounds = new Rectangle(position.getX(), position.getY(), radius, radius);
     }
 
     @Override
     public void draw(SpriteBatch batch) {
         //вычитаем radius т.к. отрисовка начинается с левого нижнего угла, а нам надо с середины человека
         batch.draw(img, position.getX() - radius, position.getY() - radius);
-
-
     }
 
     @Override
@@ -35,8 +37,10 @@ public class Player extends Actor {
         if (position.getY() - radius < 0) { // нижняя длина
             position.setY(radius);
         }
-
         position.add(direction.getX() * speed, direction.getY() * speed);
+    }
 
+    public Rectangle getBounds(){
+        return bounds;
     }
 }

@@ -64,7 +64,7 @@ public class Joystick {
 
     public void returnStick(){
         // вызывается если Stick вышел за пределы окружности
-        stickBound.pos.setPoint(stickBound.pos);
+        stickBound.pos.setPoint(circleBound.pos);
         direction.setPoint(0, 0);
         pointer = -1;
     }
