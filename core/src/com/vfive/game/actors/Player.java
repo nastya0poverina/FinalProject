@@ -1,6 +1,5 @@
 package com.vfive.game.actors;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Rectangle;
@@ -10,37 +9,40 @@ import com.vfive.game.Tools.Point2D;
 public class Player extends Actor {
 
     private Rectangle bounds;
+    private float widthPlayer, heightPlayer;
 
-    public Player(Texture img, Point2D position, float speed, float radius) {
-        super(img, position, speed, radius);
-        bounds = new Rectangle(position.getX(), position.getY(), radius, radius);
+    public Player(Texture img, Point2D position, float speed, float widthAct, float heightAct) {
+        super(img, position, speed, widthAct, heightAct);
+        widthPlayer = widthAct;
+        heightPlayer = heightAct;
+        bounds = new Rectangle(position.getX(), position.getY(), widthPlayer, heightPlayer);
     }
 
     @Override
     public void draw(SpriteBatch batch) {
-        //вычитаем radius т.к. отрисовка начинается с левого нижнего угла, а нам надо с середины человека
-        batch.draw(img, position.getX() - radius, position.getY() - radius);
+        //вычитаем высоту и ширину т.к. отрисовка начинается с левого нижнего угла, а нам надо с середины человека
+        batch.draw(img, position.getX() - widthPlayer, position.getY() - heightPlayer, widthPlayer, heightPlayer);
     }
 
     @Override
     public void update() {
         //ставим проверку что бы обьект не вылетал за экран, а только касался его границ
-        if (position.getX() - radius > Main.WIDTH) { // правая ширина
-            position.setX(Main.WIDTH - radius);
-        }
-        if (position.getX() - radius < 0){ // левая ширина
-            position.setX(radius);
-        }
-        if (position.getY() - radius > Main.HEIGHT ){ // верхняя длина
-            position.setY(Main.HEIGHT - radius);
-        }
-        if (position.getY() - radius < 0) { // нижняя длина
-            position.setY(radius);
-        }
+        if (position.getX() + widthPlayer > Main.WIDTH) // право
+            position.setX(Main.WIDTH - widthPlayer);
+
+        if (position.getX() - widthPlayer < 0) // лево
+            position.setX(widthPlayer);
+
+        if (position.getY() + heightPlayer > Main.HEIGHT) // верх
+            position.setY(Main.HEIGHT - heightPlayer);
+
+        if (position.getY() - heightPlayer < 0)  // низ
+            position.setY(heightPlayer);
+
         position.add(direction.getX() * speed, direction.getY() * speed);
     }
 
-    public Rectangle getBounds(){
+    public Rectangle getBounds() {
         return bounds;
     }
 }

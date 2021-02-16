@@ -10,7 +10,7 @@ import com.vfive.game.Main;
 import com.vfive.game.Tools.Joystick;
 import com.vfive.game.Tools.Point2D;
 import com.vfive.game.actors.Player;
-import com.vfive.game.actors.WorldObj;
+import com.vfive.game.graphisObj.WorldObj;
 
 public class GameSc implements Screen {
 
@@ -91,9 +91,9 @@ public class GameSc implements Screen {
     public void loadActor() {
         // привязывает изображения из assets к обьектам
         joystick = new Joystick(Main.circle, Main.actor, new Point2D(Main.WIDTH / 10 * 9, Main.HEIGHT / 10 * 2), Main.HEIGHT / 3);
-        player = new Player(Main.human, new Point2D(Main.WIDTH / 6, Main.HEIGHT / 6), 10, Main.HEIGHT / 2);
+        player = new Player(Main.human, new Point2D(Main.WIDTH / 6, Main.HEIGHT / 6), 7, Main.human.getWidth() / 10, Main.human.getHeight() / 10);
         book = new WorldObj(Main.book, new Point2D(Main.WIDTH / 10 * 8, Main.HEIGHT / 10 * 7), Main.book.getWidth(), Main.book.getHeight());
-        rectText = new WorldObj(Main.rectText, new Point2D(Main.WIDTH / 2, Main.HEIGHT / 2), Main.WIDTH / 10 * 8, Main.HEIGHT / 10 * 3);
+        rectText = new WorldObj(Main.rectText, new Point2D(Main.WIDTH / 2, Main.HEIGHT / 3.5f), Main.WIDTH - Main.WIDTH / 10, Main.HEIGHT / 2);
     }
 
     public void gameUpdate() {
@@ -113,7 +113,7 @@ public class GameSc implements Screen {
         if (rectBook.overlaps(rectangle)) {
             rectText.draw(batch);
         }
-        if (book.collides(rectangle)){
+        if (book.collides(rectangle)) {
             rectText.draw(batch);
         }
     }

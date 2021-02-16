@@ -8,20 +8,19 @@ import com.vfive.game.graphisObj.GraphicsObj;
 abstract public class Actor extends GraphicsObj {
 
     public Point2D position;
-    public float speed, radius;
-    public Circle bounds;
+    public float speed, width, height;
     public Point2D direction;
 
-    public Actor(Texture img, Point2D position, float speed, float radius) {
+    public Actor(Texture img, Point2D position, float speed, float widthAct, float heightAct) {
         super(img);
         this.position = new Point2D(position);
         this.speed = speed;
-        this.radius = radius;
-        bounds = new Circle(position, radius);
+        this.width = widthAct;
+        this.height = heightAct;
         direction = new Point2D(0, 0);
     }
 
-    public void setDirection(Point2D dir){
+    public void setDirection(Point2D dir) {
         direction = dir;
     }
 }
