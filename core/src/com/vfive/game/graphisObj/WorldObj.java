@@ -7,6 +7,7 @@ import com.badlogic.gdx.math.Vector2;
 import com.vfive.game.Main;
 import com.vfive.game.Tools.Circle;
 import com.vfive.game.Tools.Point2D;
+import com.vfive.game.actors.Player;
 import com.vfive.game.graphisObj.GraphicsObj;
 
 public class WorldObj extends GraphicsObj {
@@ -34,9 +35,14 @@ public class WorldObj extends GraphicsObj {
     public void update() {
     }
 
-    public boolean collides(Rectangle player) {
+    public boolean collides(Player player, WorldObj worldObj) {
         //проверяет столкновения обьекта с player
-        return player.overlaps(boundsObj);
+        if ((player.position.getX() < worldObj.x + worldObj.width)
+                && (worldObj.x < player.position.getX() + player.width)
+                && (player.position.getY() < worldObj.y + worldObj.height)
+                && (worldObj.y < player.position.getY() + player.height))
+            return true;
+        return false;
     }
 
     public float getX() {

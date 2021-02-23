@@ -18,7 +18,6 @@ public class GameSc implements Screen {
     Joystick joystick;
     Player player;
     WorldObj book, rectText;
-    Rectangle rectBook, rectangle;
 
     public GameSc(MenuSc menu) {
         this.menu = menu;
@@ -75,17 +74,6 @@ public class GameSc implements Screen {
         });
         loadActor();
 
-        rectBook = new Rectangle();
-        rectBook.setX(book.getX());
-        rectBook.setY(book.getY());
-        rectBook.setWidth(book.getWidth());
-        rectBook.setHeight(book.getHeight());
-
-        rectangle = new Rectangle();
-        rectangle.setX(rectText.getX());
-        rectangle.setY(rectText.getY());
-        rectangle.setWidth(rectText.getWidth());
-        rectangle.setHeight(rectText.getHeight());
     }
 
     public void loadActor() {
@@ -109,12 +97,9 @@ public class GameSc implements Screen {
         joystick.draw(batch);
         book.draw(batch);
 
-        //две проверки пересечения
-        if (rectBook.overlaps(rectangle)) {
-            rectText.draw(batch);
-        }
-        if (book.collides(rectangle)) {
-            rectText.draw(batch);
+        //проверка пересечения
+        if (book.collides(player, book)) {
+            rectText.draw(Main.batch);
         }
     }
 
