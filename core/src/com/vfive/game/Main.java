@@ -25,7 +25,7 @@ public class Main extends Game  {
 		actor = new Texture("circle.png");
 		btnPlay = new Texture("btn_play2.jpg");
 		background = new Texture("room.jpg");
-		human = new Texture("human3.png");
+		human = new Texture("player_idle.png");
 		book = new Texture("book.png");
 		rectText = new Texture("rect_text.jpg");
 		setScreen(new MenuSc(this));

@@ -73,15 +73,14 @@ public class GameSc implements Screen {
             }
         });
         loadActor();
-
     }
 
     public void loadActor() {
         // привязывает изображения из assets к обьектам
         joystick = new Joystick(Main.circle, Main.actor, new Point2D(Main.WIDTH / 10 * 9, Main.HEIGHT / 10 * 2), Main.HEIGHT / 3);
-        player = new Player(Main.human, new Point2D(Main.WIDTH / 6, Main.HEIGHT / 6), 7, Main.human.getWidth() / 10, Main.human.getHeight() / 10);
+        player = new Player(Main.human, new Point2D(Main.WIDTH / 6, Main.HEIGHT / 6), 5, Main.human.getWidth(), Main.human.getHeight());
         book = new WorldObj(Main.book, new Point2D(Main.WIDTH / 10 * 8, Main.HEIGHT / 10 * 7), Main.book.getWidth(), Main.book.getHeight());
-        rectText = new WorldObj(Main.rectText, new Point2D(Main.WIDTH / 2, Main.HEIGHT / 3.5f), Main.WIDTH - Main.WIDTH / 10, Main.HEIGHT / 2);
+        rectText = new WorldObj(Main.rectText, new Point2D(Main.WIDTH / 2.4f, Main.HEIGHT / 3.5f), Main.WIDTH - Main.WIDTH / 4, Main.HEIGHT / 2);
     }
 
     public void gameUpdate() {
