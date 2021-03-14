@@ -25,7 +25,6 @@ public class WorldObj extends GraphicsObj {
         boundsObj = new Rectangle(position.getX(), position.getY(), img.getWidth(), img.getHeight());
     }
 
-    @Override
     public void draw(SpriteBatch batch) {
         //вычитаем radius т.к. отрисовка начинается с левого нижнего угла, а нам надо с середины обьекта
         batch.draw(img, x - width / 2, y - height / 2, width, height);
@@ -38,7 +37,7 @@ public class WorldObj extends GraphicsObj {
     public boolean collides(Player player, WorldObj worldObj) {
         //проверяет столкновения обьекта с player
         if ((player.position.getX() < worldObj.x + worldObj.width)
-                && (worldObj.x < player.position.getX() + player.width)
+                && (worldObj.x < player.position.getX() + player.width / 3)
                 && (player.position.getY() < worldObj.y + worldObj.height)
                 && (worldObj.y < player.position.getY() + player.height))
             return true;

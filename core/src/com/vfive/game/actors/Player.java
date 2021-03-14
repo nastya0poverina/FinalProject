@@ -2,30 +2,35 @@ package com.vfive.game.actors;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Rectangle;
 import com.vfive.game.Main;
+import com.vfive.game.Tools.Animation;
 import com.vfive.game.Tools.Point2D;
 
 public class Player extends Actor {
 
     private Rectangle bounds;
     private float widthPlayer, heightPlayer;
+    private Animation animation;
 
     public Player(Texture img, Point2D position, float speed, float widthAct, float heightAct) {
         super(img, position, speed, widthAct, heightAct);
         widthPlayer = widthAct;
         heightPlayer = heightAct;
-        bounds = new Rectangle(position.getX(), position.getY(), widthPlayer, heightPlayer);
-    }
+        animation = new Animation(new TextureRegion(img), 3, 0.5f);
+        bounds = new Rectangle(position.getX(), position.getY(), img.getWidth() / 3, img.getHeight());
 
-    @Override
-    public void draw(SpriteBatch batch) {
-        //вычитаем высоту и ширину т.к. отрисовка начинается с левого нижнего угла, а нам надо с середины человека
-        batch.draw(img, position.getX() - widthPlayer, position.getY() - heightPlayer, widthPlayer, heightPlayer);
     }
 
     @Override
     public void update() {
+
+    }
+
+    public void updatePlayer(float dt) {
+        animation.update(dt);
+
         //ставим проверку что бы обьект не вылетал за экран, а только касался его границ
         if (position.getX() + widthPlayer > Main.WIDTH) // право
             position.setX(Main.WIDTH - widthPlayer);
@@ -44,5 +49,9 @@ public class Player extends Actor {
 
     public Rectangle getBounds() {
         return bounds;
+    }
+
+    public TextureRegion getPlayer() {
+        return animation.getFrame();
     }
 }

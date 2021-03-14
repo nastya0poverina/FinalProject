@@ -13,6 +13,5 @@ public abstract class GraphicsObj {
         this.img = img;
     }
 
-    public abstract void draw(SpriteBatch batch);
     public abstract void update();
 }

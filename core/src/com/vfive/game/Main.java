@@ -23,10 +23,10 @@ public class Main extends Game  {
 		HEIGHT = Gdx.graphics.getHeight();
 		circle = new Texture("circle.png");
 		actor = new Texture("circle.png");
-		btnPlay = new Texture("btn_play2.jpg");
+		btnPlay = new Texture("start.png");
 		background = new Texture("room.jpg");
-		human = new Texture("player_idle.png");
-		book = new Texture("book.png");
+		human = new Texture("sprite.png");
+		book = new Texture("paper.png");
 		rectText = new Texture("rect_text.jpg");
 		setScreen(new MenuSc(this));
 	}

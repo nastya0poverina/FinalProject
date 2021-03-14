@@ -83,16 +83,15 @@ public class GameSc implements Screen {
         rectText = new WorldObj(Main.rectText, new Point2D(Main.WIDTH / 2.4f, Main.HEIGHT / 3.5f), Main.WIDTH - Main.WIDTH / 4, Main.HEIGHT / 2);
     }
 
-    public void gameUpdate() {
+    public void gameUpdate(float dt) {
         // устанавливает на player джостик
         player.setDirection(joystick.getDir());
-        player.update();
+        player.updatePlayer(dt);
     }
 
     public void gameRender(SpriteBatch batch) {
         // отрисовывает всех
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-        player.draw(batch);
         joystick.draw(batch);
         book.draw(batch);
 
@@ -104,10 +103,11 @@ public class GameSc implements Screen {
 
     @Override
     public void render(float delta) {
-        gameUpdate();
+        gameUpdate(delta);
         Main.batch.begin();
         Main.batch.draw(Main.background, 0, 0, Main.WIDTH, Main.HEIGHT);
         gameRender(Main.batch);
+        Main.batch.draw(player.getPlayer(), player.position.getX(), player.position.getY());
         Main.batch.end();
     }
 
