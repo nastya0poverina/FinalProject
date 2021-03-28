@@ -4,27 +4,29 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Rectangle;
+import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.vfive.game.Main;
 import com.vfive.game.Tools.Animation;
 import com.vfive.game.Tools.Point2D;
 
 public class Player extends Actor {
 
+    public Point2D position;
     private Rectangle bounds;
-    private float widthPlayer, heightPlayer;
+    public float widthPlayer, heightPlayer;
+    private float speed;
     private Animation animation;
+    private Point2D direction;
 
-    public Player(Texture img, Point2D position, float speed, float widthAct, float heightAct) {
-        super(img, position, speed, widthAct, heightAct);
+
+    public Player(Texture img, Point2D pos, float speedPlayer, float widthAct, float heightAct) {
+        speed = speedPlayer;
+        position = pos;
         widthPlayer = widthAct;
         heightPlayer = heightAct;
         animation = new Animation(new TextureRegion(img), 3, 0.5f);
         bounds = new Rectangle(position.getX(), position.getY(), img.getWidth() / 3, img.getHeight());
-
-    }
-
-    @Override
-    public void update() {
+        direction = new Point2D(0.0F, 0.0F);
 
     }
 
@@ -47,11 +49,17 @@ public class Player extends Actor {
         position.add(direction.getX() * speed, direction.getY() * speed);
     }
 
+/*
     public Rectangle getBounds() {
         return bounds;
     }
+*/
 
     public TextureRegion getPlayer() {
         return animation.getFrame();
+    }
+
+    public void setDirection(Point2D dir) {
+        this.direction = dir;
     }
 }

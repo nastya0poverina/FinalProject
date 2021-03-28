@@ -15,7 +15,7 @@ public class Main extends Game  {
 	public static int HEIGHT;
 	public static Texture circle, actor, btnPlay, background, human, book, rectText;
 
-	
+
 	@Override
 	public void create () {
 		batch = new SpriteBatch();
@@ -39,7 +39,7 @@ public class Main extends Game  {
 			radius = object.getHeight();
 		return radius;
 	}
-	
+
 	@Override
 	public void dispose () {
 		batch.dispose();
