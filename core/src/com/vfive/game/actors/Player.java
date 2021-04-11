@@ -49,11 +49,9 @@ public class Player extends Actor {
         position.add(direction.getX() * speed, direction.getY() * speed);
     }
 
-/*
     public Rectangle getBounds() {
         return bounds;
     }
-*/
 
     public TextureRegion getPlayer() {
         return animation.getFrame();

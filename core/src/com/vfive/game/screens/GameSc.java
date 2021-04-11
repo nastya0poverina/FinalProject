@@ -17,7 +17,7 @@ public class GameSc implements Screen {
     MenuSc menu;
     Joystick joystick;
     Player player;
-    WorldObj book, rectText;
+    WorldObj box1, box2, glue, paper;
 
     public GameSc(MenuSc menu) {
         this.menu = menu;
@@ -79,8 +79,10 @@ public class GameSc implements Screen {
         // привязывает изображения из assets к обьектам
         joystick = new Joystick(Main.circle, Main.actor, new Point2D(Main.WIDTH / 10 * 9, Main.HEIGHT / 10 * 2), Main.HEIGHT / 3);
         player = new Player(Main.human, new Point2D(Main.WIDTH / 6, Main.HEIGHT / 6), 5, Main.human.getWidth(), Main.human.getHeight());
-        book = new WorldObj(Main.book, new Point2D(Main.WIDTH / 10 * 8, Main.HEIGHT / 10 * 7), Main.book.getWidth(), Main.book.getHeight());
-        rectText = new WorldObj(Main.rectText, new Point2D(Main.WIDTH / 2.4f, Main.HEIGHT / 3.5f), Main.WIDTH - Main.WIDTH / 4, Main.HEIGHT / 2);
+        box1 = new WorldObj(Main.box, new Point2D(Main.WIDTH / 10 * 3, Main.HEIGHT / 10 * 7));
+        box2 = new WorldObj(Main.box, new Point2D(Main.WIDTH / 10 * 8, Main.HEIGHT / 10 * 5));
+        paper = new WorldObj(Main.scrap_paper, new Point2D(Main.WIDTH / 10 * 8 - box2.getWidth() + 50, Main.HEIGHT / 10 * 5), Main.scrap_paper.getWidth() / 7, Main.scrap_paper.getHeight() / 7 );
+        glue = new WorldObj(Main.glue, new Point2D(Main.WIDTH / 10 * 3 + box1.getWidth() + 50, Main.HEIGHT / 10 * 7));
     }
 
     public void gameUpdate(float dt) {
@@ -93,12 +95,13 @@ public class GameSc implements Screen {
         // отрисовывает всех
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         joystick.draw(batch);
-        book.draw(batch);
+        box1.draw(batch);
+        box2.draw(batch);
 
-        //проверка пересечения
-        if (book.collides(player, book)) {
-            rectText.draw(Main.batch);
-        }
+        if (box1.collides(player, box1))
+            glue.draw(Main.batch);
+        if (box2.collides(player, box2))
+            paper.draw(Main.batch);
     }
 
     @Override
