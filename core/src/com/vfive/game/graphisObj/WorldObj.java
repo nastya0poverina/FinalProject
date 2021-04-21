@@ -37,7 +37,7 @@ public class WorldObj {
         batch.draw(img, x - width / 2, y - height / 2, width, height);
     }
 
-    public boolean collides(Player player, WorldObj worldObj) {
+    public boolean isCollides(Player player, WorldObj worldObj) {
         //проверяет столкновения обьекта с player
 
         if (player.position.getX() < worldObj.x + worldObj.getWidth() / 2 &&          // правая стенка ящика
@@ -71,6 +71,46 @@ public class WorldObj {
             player.position.setY(worldObj.y + worldObj.height / 2);
             return true;
         }
+        return false;
+    }
+
+    public void collides(Player player, WorldObj worldObj) {
+        //проверяет столкновения обьекта с player
+        if (player.position.getX() < worldObj.x + worldObj.getWidth() / 2 &&          // правая стенка ящика
+                player.position.getX() > worldObj.x - worldObj.getWidth() / 2 &&
+                player.position.getY() < worldObj.y + worldObj.getHeight() / 2 - 5 &&
+                player.position.getY() > worldObj.y - worldObj.getHeight() / 2 )
+            player.position.setX(worldObj.x + worldObj.getHeight() / 2);
+
+        if(player.position.getX() > worldObj.x - worldObj.getWidth() &&              //левая стенка ящика
+                player.position.getX() < worldObj.x + worldObj.getWidth() / 2 &&
+                player.position.getY() < worldObj.y + worldObj.getHeight() / 2 - 5 &&
+                player.position.getY() > worldObj.y - worldObj.getHeight() / 2)
+            player.position.setX(worldObj.x - worldObj.getWidth());
+
+        if (player.position.getY() + player.heightPlayer / 2 > worldObj.y - worldObj.getHeight() / 2 &&    // нижняя стенка ящика
+                player.position.getX() > worldObj.x - worldObj.getWidth() &&
+                player.position.getX() < worldObj.x + worldObj.getWidth() / 2 &&
+                player.position.getY() < worldObj.y + worldObj.getHeight() / 2 - 5)
+            player.position.setY(worldObj.y - worldObj.getHeight() / 2 - player.heightPlayer / 2);
+
+        if (player.position.getY() < worldObj.y + worldObj.height / 2 &&                   //верхняя стенка ящика
+                player.position.getX() > worldObj.x - worldObj.getWidth() &&
+                player.position.getX() < worldObj.x + worldObj.getWidth() / 2 &&
+                player.position.getY() > worldObj.y - worldObj.getHeight() / 2)
+            player.position.setY(worldObj.y + worldObj.height / 2);
+    }
+
+    public boolean isCheck( Player player, WorldObj worldObj ){
+        if (player.position.getX() > worldObj.getX() - worldObj.getWidth() - 50 &&
+                player.position.getX() < worldObj.getX() + worldObj.getWidth() / 2 + 50 &&
+                player.position.getY() > worldObj.getY() - worldObj.getHeight() - 50 &&
+                player.position.getY() < worldObj.getY() + worldObj.getHeight() / 2 + 50)
+            return true;
+        return false;
+    }
+
+    public boolean isTouch(WorldObj worldObj){
         return false;
     }
 

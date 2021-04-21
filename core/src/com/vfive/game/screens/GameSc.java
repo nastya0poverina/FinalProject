@@ -12,12 +12,14 @@ import com.vfive.game.Tools.Point2D;
 import com.vfive.game.actors.Player;
 import com.vfive.game.graphisObj.WorldObj;
 
+import static com.badlogic.gdx.scenes.scene2d.InputEvent.Type.touchDown;
+
 public class GameSc implements Screen {
 
     MenuSc menu;
     Joystick joystick;
     Player player;
-    WorldObj box1, box2, glue, paper;
+    WorldObj box1, box2, glue, paper, btnCheck;
 
     public GameSc(MenuSc menu) {
         this.menu = menu;
@@ -79,6 +81,7 @@ public class GameSc implements Screen {
         // привязывает изображения из assets к обьектам
         joystick = new Joystick(Main.circle, Main.actor, new Point2D(Main.WIDTH / 10 * 9, Main.HEIGHT / 10 * 2), Main.HEIGHT / 3);
         player = new Player(Main.human, new Point2D(Main.WIDTH / 6, Main.HEIGHT / 6), 5, Main.human.getWidth(), Main.human.getHeight());
+        btnCheck = new WorldObj(Main.btnCheck, new Point2D(Main.WIDTH / 10 * 9, Main.HEIGHT / 10 * 4 + 50), 83f * 5, 26f * 5);
         box1 = new WorldObj(Main.box, new Point2D(Main.WIDTH / 10 * 3, Main.HEIGHT / 10 * 7));
         box2 = new WorldObj(Main.box, new Point2D(Main.WIDTH / 10 * 8, Main.HEIGHT / 10 * 5));
         paper = new WorldObj(Main.scrap_paper, new Point2D(Main.WIDTH / 10 * 8 - box2.getWidth() + 50, Main.HEIGHT / 10 * 5), Main.scrap_paper.getWidth() / 7, Main.scrap_paper.getHeight() / 7 );
@@ -98,10 +101,14 @@ public class GameSc implements Screen {
         box1.draw(batch);
         box2.draw(batch);
 
-        if (box1.collides(player, box1))
-            glue.draw(Main.batch);
-        if (box2.collides(player, box2))
-            paper.draw(Main.batch);
+        if (box1.isCheck(player, box1)) {
+            btnCheck.draw(Main.batch);
+            box1.collides(player, box1);
+        }
+        if (box2.isCheck(player, box2)){
+            btnCheck.draw(Main.batch);
+            box2.collides(player, box2);
+        }
     }
 
     @Override

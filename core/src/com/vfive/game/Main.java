@@ -13,7 +13,7 @@ public class Main extends Game  {
 	public static SpriteBatch batch;
 	public static int WIDTH;
 	public static int HEIGHT;
-	public static Texture circle, actor, btnPlay, background, human, box, scrap_paper, glue;
+	public static Texture circle, actor, btnPlay, background, human, box, scrap_paper, glue, btnCheck;
 
 
 	@Override
@@ -29,6 +29,7 @@ public class Main extends Game  {
 		box = new Texture("boxCrate_single.png");
 		scrap_paper = new Texture("scrap_paper.png");
 		glue = new Texture("glue.jpg");
+		btnCheck = new Texture("check_btn.png");
 
 		setScreen(new MenuSc(this));
 	}
