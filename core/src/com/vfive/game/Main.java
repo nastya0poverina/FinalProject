@@ -10,6 +10,7 @@ import com.vfive.game.screens.GameSc;
 import com.vfive.game.screens.MenuSc;
 
 public class Main extends Game  {
+
 	public static SpriteBatch batch;
 	public static int WIDTH;
 	public static int HEIGHT;

@@ -25,7 +25,7 @@ public class Player extends Actor {
         widthPlayer = widthAct;
         heightPlayer = heightAct;
         animation = new Animation(new TextureRegion(img), 3, 0.5f);
-        bounds = new Rectangle(position.getX(), position.getY(), img.getWidth() / 3, img.getHeight());
+        bounds = new Rectangle(position.getX(), position.getY(), img.getWidth() / 3f, img.getHeight());
         direction = new Point2D(0.0F, 0.0F);
 
     }
