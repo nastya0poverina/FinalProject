@@ -117,7 +117,7 @@ public class GameSc implements Screen {
 
          //ставит процессор на кнопку в радиусе isCheck и отпукает после нажатия на btnCheck
         if (box1.isCheck(player, box1)) {
-            if (!box1Islooting) {
+            if (box1Islooting == false) {
                 stage.draw();
                 Gdx.input.setInputProcessor(stage);
                 joystick.returnStick();
@@ -126,7 +126,7 @@ public class GameSc implements Screen {
         }
 
         if (box2.isCheck(player, box2)) {
-            if(!box2Islooting) {
+            if(box2Islooting == false) {
                 stage.draw();
                 Gdx.input.setInputProcessor(stage);
                 joystick.returnStick();
