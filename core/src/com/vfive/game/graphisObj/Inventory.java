@@ -17,14 +17,12 @@ public class Inventory {
         return -1;
     }
 
-    public boolean addItem(ItemInventory item) {
+    public void addItem(ItemInventory item) {
         int i = getIndexFirstFreeSlot();
         if (i != -1) {
             items[i] = item;
             item.index = i;
-            return true;
         }
-        return false;
     }
 
     public void removeItem(int index) {

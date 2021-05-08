@@ -1,11 +1,14 @@
 package com.vfive.game.screens;
 
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.graphics.Texture;
 import com.vfive.game.Main;
 
 public class InventorySc implements Screen {
 
     Main game;
+    Texture background;
+    Texture itembox;
 
     public InventorySc(Main game) {
         this.game = game;

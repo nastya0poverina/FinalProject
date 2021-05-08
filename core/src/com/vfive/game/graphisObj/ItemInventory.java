@@ -5,7 +5,7 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
 
 public class ItemInventory extends Actor {
     String name;
-    boolean equipped = false;
+    boolean equipped;
     Texture img;
     int index;
 
@@ -13,5 +13,13 @@ public class ItemInventory extends Actor {
         this.name = name;
         this.equipped = equipped;
         this.img = img;
+    }
+
+    public void setEquipped(boolean equipped) {
+        this.equipped = equipped;
+    }
+
+    public boolean getEquipped() {
+        return equipped;
     }
 }
