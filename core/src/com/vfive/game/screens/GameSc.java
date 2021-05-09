@@ -26,7 +26,7 @@ public class GameSc implements Screen {
     WorldObj box1, box2, glue, paper, money;
     BtnCheck btnCheck;
     Stage stage;
-    ItemInventory glue1, paper1;
+    public static ItemInventory glue1, paper1;
     BtnInventory btnInventory;
 
     public static boolean box1Islooting = false;

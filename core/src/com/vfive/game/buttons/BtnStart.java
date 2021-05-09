@@ -7,6 +7,7 @@ import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.vfive.game.Main;
 import com.vfive.game.screens.GameSc;
+import com.vfive.game.screens.InventorySc;
 
 public class BtnStart extends Actor {
 

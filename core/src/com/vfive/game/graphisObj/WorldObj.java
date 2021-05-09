@@ -13,6 +13,7 @@ public class WorldObj {
     private float x, y;
     private float width, height;
     private Texture img;
+    public boolean isEmpty;
 
     public WorldObj(Texture texture, Point2D position) {
         img = texture;
@@ -132,5 +133,9 @@ public class WorldObj {
 
     public float getHeight() {
         return height;
+    }
+
+    public void setEmpty(boolean empty) {
+        isEmpty = empty;
     }
 }
