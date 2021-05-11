@@ -138,4 +138,8 @@ public class WorldObj {
     public void setEmpty(boolean empty) {
         isEmpty = empty;
     }
+
+    public boolean getEmpty() {
+        return isEmpty;
+    }
 }

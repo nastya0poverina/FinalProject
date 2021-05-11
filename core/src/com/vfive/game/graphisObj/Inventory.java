@@ -21,7 +21,7 @@ public class Inventory {
         int i = getIndexFirstFreeSlot();
         if (i != -1) {
             items[i] = item;
-            item.index = i;
+            //item.index = i;
         }
     }
 

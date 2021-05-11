@@ -24,11 +24,10 @@ public class BtnCheck extends Actor {
     private static Logger log = Logger.getLogger(BtnCheck.class.getName());
 
     private Texture img;
-    WorldObj box1;
-    WorldObj box2;
+    WorldObj box1, box2, box3, box4;
     Player player;
 
-    public BtnCheck(Texture img, Main game, Point2D point2D, float height, float width, WorldObj box1, WorldObj box2, Player player) {
+    public BtnCheck(Texture img, Main game, Point2D point2D, float height, float width, WorldObj box1, WorldObj box2, WorldObj box3, WorldObj box4, Player player) {
         addListener(new BtnCheckListener( game));
         this.img = img;
         setHeight(height);
@@ -37,6 +36,8 @@ public class BtnCheck extends Actor {
         setY(point2D.getY());
         this.box1 = box1;
         this.box2 = box2;
+        this.box3 = box3;
+        this.box4 = box4;
         this.player = player;
     }
 
@@ -58,13 +59,22 @@ public class BtnCheck extends Actor {
         public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
             // проверяет осмотрели ли мы коробки, нужно что бы переключить InputProcessor на джостике
             isTouch = true;
+
             if (box1.isCheck(player, box1)){
                 GameSc.box1Islooting = true;
-                log.info("НАЖАЛОСЬ!!!!!");
+                log.info("НАЖАЛОСЬ1!!!!!");
             }
             if (box2.isCheck(player, box2)){
                 GameSc.box2Islooting = true;
                 log.info("НАЖАЛОСЬ2!!!!!");
+            }
+            if (box3.isCheck(player, box3)){
+                GameSc.box3Islooting = true;
+                log.info("НАЖАЛОСЬ3!!!!!");
+            }
+            if (box4.isCheck(player, box4)){
+                GameSc.box4Islooting = true;
+                log.info("НАЖАЛОСЬ4!!!!!");
             }
             return true;
         }

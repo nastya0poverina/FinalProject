@@ -17,6 +17,7 @@ public class Player extends Actor {
     private float speed;
     private Animation animation;
     private Point2D direction;
+    private Texture idle;
 
 
     public Player(Texture img, Point2D pos, float speedPlayer, float widthAct, float heightAct) {
@@ -27,7 +28,7 @@ public class Player extends Actor {
         animation = new Animation(new TextureRegion(img), 3, 0.5f);
         bounds = new Rectangle(position.getX(), position.getY(), img.getWidth() / 3f, img.getHeight());
         direction = new Point2D(0.0F, 0.0F);
-
+        idle = Main.player;
     }
 
     public void updatePlayer(float dt) {
@@ -51,6 +52,10 @@ public class Player extends Actor {
 
     public Rectangle getBounds() {
         return bounds;
+    }
+
+    public Texture getIdle() {
+        return idle;
     }
 
     public TextureRegion getPlayer() {

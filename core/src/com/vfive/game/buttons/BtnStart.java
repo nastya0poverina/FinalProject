@@ -22,6 +22,11 @@ public class BtnStart extends Actor {
         setY(Main.HEIGHT / 2f - this.getHeight() / 2f);
     }
 
+
+    /*public void draw(Batch batch) {
+        batch.draw(img, this.getX(), this.getY() , this.getWidth(), this.getHeight());
+    }*/
+
     @Override
     public void draw(Batch batch, float parentAlpha) {
         batch.draw(img, this.getX(), this.getY() , this.getWidth(), this.getHeight());

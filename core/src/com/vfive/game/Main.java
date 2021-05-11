@@ -20,7 +20,7 @@ public class Main extends Game  {
 	public static SpriteBatch batch;
 	public static int WIDTH;
 	public static int HEIGHT;
-	public static Texture circle, actor, btnPlay, backgroundRoom, human, box, scrap_paper, glue, btnCheck, backgroundInventory, boxItem, btnInventory;
+	public static Texture circle, actor, btnPlay, backgroundRoom, human, box, scrap_paper, glue, btnCheck, backgroundInventory, boxItem, btnInventory, player, btnBack;
 	public static Texture money_0;
 	public static Inventory inventory;
 
@@ -39,13 +39,15 @@ public class Main extends Game  {
 		backgroundRoom = new Texture("background_room.jpg");
 		human = new Texture("sprite.png");
 		box = new Texture("box1.png");
-		scrap_paper = new Texture("scrap_paper.png");
-		glue = new Texture("glue.jpg");
+		scrap_paper = new Texture("paper.png");
+		glue = new Texture("glue.png");
 		btnCheck = new Texture("check_btn.png");
-		backgroundInventory = new Texture("background_inventory.jpg");
+		backgroundInventory = new Texture("backgroundInventory.jpg");
 		boxItem = new Texture("boxitem.png");
 		btnInventory = new Texture("button_inventory.png");
 		money_0 = new Texture("money_0.png");
+		player = new Texture("player_idle.png");
+		btnBack = new Texture("btn_back.png");
 
 		setScreen(new MenuSc(this));
 

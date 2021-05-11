@@ -23,24 +23,28 @@ public class GameSc implements Screen {
     Main menu;
     Joystick joystick;
     Player player;
-    WorldObj box1, box2, glue, paper, money;
+    WorldObj box1, box2, box3, box4, money;
     BtnCheck btnCheck;
     Stage stage;
     public static ItemInventory glue1, paper1;
     BtnInventory btnInventory;
+    InventorySc inventorySc;
 
     public static boolean box1Islooting = false;
     public static boolean box2Islooting = false;
+    public static boolean box3Islooting = false;
+    public static boolean box4Islooting = false;
 
     private static Logger logger = Logger.getLogger(Game.class.getName());
 
     public GameSc(Main menu) {
         this.menu = menu;
+        loadActor();
     }
 
     @Override
     public void show() {
-        loadActor();
+
     }
 
     public void loadActor() {
@@ -50,21 +54,22 @@ public class GameSc implements Screen {
 
         box1 = new WorldObj(Main.box, new Point2D(Main.WIDTH / 10 * 3, Main.HEIGHT / 10 * 6), Main.box.getWidth() * 2, Main.box.getHeight() * 2);
         box2 = new WorldObj(Main.box, new Point2D(Main.WIDTH / 10 * 6, Main.HEIGHT / 10 * 5), Main.box.getWidth() * 2, Main.box.getHeight() * 2);
+        box3 = new WorldObj(Main.box, new Point2D(Main.WIDTH / 10 * 2, Main.HEIGHT / 10 * 3), Main.box.getWidth() * 2, Main.box.getHeight() * 2);
+        box4 = new WorldObj(Main.box, new Point2D(Main.WIDTH / 10 * 8, Main.HEIGHT / 10 * 7), Main.box.getWidth() * 2, Main.box.getHeight() * 2);
 
-        btnCheck = new BtnCheck(Main.btnCheck, menu, new Point2D(Main.WIDTH / 10 * 8 + Main.box.getWidth()/2f, Main.HEIGHT / 10 * 4 + 50), 26f * 5, joystick.getSize(),box1,box2,player);
+        btnCheck = new BtnCheck(Main.btnCheck, menu, new Point2D(Main.WIDTH / 10 * 8 + Main.box.getWidth() / 2f, Main.HEIGHT / 10 * 4 + 50), 26f * 5, joystick.getSize(), box1, box2, box3, box4, player);
         btnInventory = new BtnInventory(Main.btnInventory, menu, new Point2D(Main.WIDTH / 10 * 9 - 100, Main.HEIGHT / 10 * 9 + 40), Main.btnInventory.getHeight() * 3, Main.btnInventory.getWidth() * 3);
 
-        //paper = new WorldObj(Main.scrap_paper, new Point2D(Main.WIDTH / 10 * 8 - box2.getWidth() + 50, Main.HEIGHT / 10 * 5), Main.scrap_paper.getWidth() / 7, Main.scrap_paper.getHeight() / 7);
-        //glue = new WorldObj(Main.glue, new Point2D(Main.WIDTH / 10 * 3 + box1.getWidth() + 50, Main.HEIGHT / 10 * 7));
+        inventorySc = new InventorySc(menu, this);
 
-        glue1 = new ItemInventory("GLUE", false, Main.glue);
-        paper1 = new ItemInventory("PAPER", false, Main.scrap_paper);
+        glue1 = new ItemInventory("GLUE", false, Main.glue, inventorySc.getFreeBox());
+        paper1 = new ItemInventory("PAPER", false, Main.scrap_paper, inventorySc.getFreeBox());
 
-        money = new WorldObj(Main.money_0, new Point2D(Main.WIDTH / 10 * 8 - 50, Main.HEIGHT / 10 * 9 + 50), Main.money_0.getWidth()  * 2, Main.money_0.getHeight() * 2);
+        money = new WorldObj(Main.money_0, new Point2D(Main.WIDTH / 10 * 8 - 50, Main.HEIGHT / 10 * 9 + 50), Main.money_0.getWidth() * 2, Main.money_0.getHeight() * 2);
 
         stage = new Stage();
         stage.addActor(btnCheck);
-        stage.addActor(btnInventory);
+        //stage.addActor(btnInventory);
     }
 
     public void gameUpdate(float dt) {
@@ -77,14 +82,25 @@ public class GameSc implements Screen {
         // отрисовывает всех, обновляется каждую секунду, делает проверки
 
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-        joystick.draw(batch);
+
         box1.draw(batch);
         box2.draw(batch);
+        box3.draw(batch);
+        box4.draw(batch);
         money.draw(batch);
 
+        //отрисовка анимации спокойствияБ относительно положению стика в джостике
+        if (joystick.getDir().getX() == 0 && joystick.getDir().getY() == 0) {
+            batch.draw(player.getIdle(), player.position.getX(), player.position.getY());
+        } else {
+            batch.draw(player.getPlayer(), player.position.getX(), player.position.getY());
+        }
+
+        joystick.draw(batch);
+
         // ставит процессор джойстика, если мы не рядом с коробками
-       // if(!box1.isCheck(player,box1) && !box2.isCheck(player, box2) )
-         Gdx.input.setInputProcessor(new InputProcessor() {
+        // if(!box1.isCheck(player,box1) && !box2.isCheck(player, box2) )
+        Gdx.input.setInputProcessor(new InputProcessor() {
             @Override
             public boolean keyDown(int keycode) {
                 return false;
@@ -133,7 +149,28 @@ public class GameSc implements Screen {
             }
         });
 
-         //ставит процессор на кнопку в радиусе isCheck и отпукает после нажатия на btnCheck
+        boxActions();
+
+        addItemInInventory(glue1, glue1.getEquipped());
+        addItemInInventory(paper1, paper1.getEquipped());
+
+/*        if (Main.inventory.isEmpty(0))
+            logger.info("ячейка 1 пуста");
+        if (Main.inventory.isEmpty(1))
+            logger.info("ячейка 2 пуста");
+        if (Main.inventory.isEmpty(2))
+            logger.info("ячейка 3 пуста");
+        if (Main.inventory.isEmpty(3))
+            logger.info("ячейка 4 пуста");
+        if (Main.inventory.isEmpty(4))
+            logger.info("ячейка 5 пуста");*/
+
+        btnInventory.draw(batch);
+
+    }
+
+    public void boxActions() {
+        //ставит процессор на кнопку в радиусе isCheck и отпукает после нажатия на btnCheck
         if (box1.isCheck(player, box1)) {
             if (box1Islooting == false) {
                 stage.draw();
@@ -145,7 +182,7 @@ public class GameSc implements Screen {
         }
 
         if (box2.isCheck(player, box2)) {
-            if(box2Islooting == false) {
+            if (box2Islooting == false) {
                 stage.draw();
                 Gdx.input.setInputProcessor(stage);
                 paper1.setEquipped(true);
@@ -154,18 +191,32 @@ public class GameSc implements Screen {
             box2.collides(player, box2);
         }
 
-        addItemInInventory(glue1, glue1.getEquipped());
-        addItemInInventory(paper1, paper1.getEquipped());
+        if (box3.isCheck(player, box3)) {
+            if (box3Islooting == false) {
+                stage.draw();
+                Gdx.input.setInputProcessor(stage);
+                //paper1.setEquipped(true);
+                joystick.returnStick();
+            }
+            box3.collides(player, box3);
+        }
 
-        if (Main.inventory.isEmpty(0))
-            logger.info("инвентарь пуст");
+        if (box4.isCheck(player, box4)) {
+            if (box4Islooting == false) {
+                stage.draw();
+                Gdx.input.setInputProcessor(stage);
+                // paper1.setEquipped(true);
+                joystick.returnStick();
+            }
+            box4.collides(player, box4);
+        }
     }
 
-    public void addItemInInventory (ItemInventory item, boolean isEquipped){
+    public void addItemInInventory(ItemInventory item, boolean isEquipped) {
         if (isEquipped == true) {
             Main.inventory.addItem(item);
-
         }
+
     }
 
     @Override
@@ -174,7 +225,7 @@ public class GameSc implements Screen {
         Main.batch.begin();
         Main.batch.draw(Main.backgroundRoom, 0, 0, Main.WIDTH, Main.HEIGHT);
         gameRender(Main.batch);
-        Main.batch.draw(player.getPlayer(), player.position.getX(), player.position.getY());
+        // Main.batch.draw(player.getPlayer(), player.position.getX(), player.position.getY());
         Main.batch.end();
     }
 
@@ -206,6 +257,10 @@ public class GameSc implements Screen {
     public void touch(float x, float y, boolean isTouch, int pointer) {
         for (int i = 0; i < 5; i++) {
             joystick.update(x, y, isTouch, pointer);
+            if (x > btnInventory.getX() && x < btnInventory.getX() + btnInventory.getWidth()
+                    && y > btnInventory.getY() && y < btnInventory.getY() + btnInventory.getHeight()) {
+                menu.setScreen(inventorySc);
+            }
         }
     }
 }
