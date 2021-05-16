@@ -8,16 +8,17 @@ import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.vfive.game.Main;
 import com.vfive.game.Tools.Point2D;
 import com.vfive.game.screens.GameSc;
+import com.vfive.game.screens.SecondFloorSc;
 
 import java.util.logging.Logger;
 
-public class BtnBack extends Actor {
+public class BtnScBack extends Actor {
     private static Logger log = Logger.getLogger(BtnCheck.class.getName());
 
     private Texture btnImage;
-    private GameSc screen;
+    private SecondFloorSc screen;
 
-    public BtnBack(Texture btnImage, Main game, Point2D point2D, float height, float width,GameSc screen) {
+    public BtnScBack(Texture btnImage, Main game, Point2D point2D, float height, float width, SecondFloorSc screen) {
         this.btnImage = btnImage;
         this.screen = screen;
         setHeight(height);
@@ -35,9 +36,9 @@ public class BtnBack extends Actor {
 
     private class BtnBackListener extends InputListener {
         private Main game;
-        private GameSc screen;
+        private SecondFloorSc screen;
 
-        public BtnBackListener(Main game, GameSc screen) {
+        public BtnBackListener(Main game, SecondFloorSc screen) {
             this.game = game;
             this.screen = screen;
         }

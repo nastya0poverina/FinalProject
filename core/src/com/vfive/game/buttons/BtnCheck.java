@@ -8,6 +8,7 @@ import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.vfive.game.Main;
 import com.vfive.game.Tools.Point2D;
 import com.vfive.game.actors.Player;
+import com.vfive.game.graphisObj.ItemInventory;
 import com.vfive.game.graphisObj.WorldObj;
 import com.vfive.game.screens.GameSc;
 
@@ -25,9 +26,10 @@ public class BtnCheck extends Actor {
 
     private Texture img;
     WorldObj box1, box2, box3, box4;
+    ItemInventory item;
     Player player;
 
-    public BtnCheck(Texture img, Main game, Point2D point2D, float height, float width, WorldObj box1, WorldObj box2, WorldObj box3, WorldObj box4, Player player) {
+    public BtnCheck(Texture img, Main game, Point2D point2D, float height, float width, WorldObj box1, WorldObj box2, WorldObj box3, WorldObj box4,ItemInventory item, Player player) {
         addListener(new BtnCheckListener( game));
         this.img = img;
         setHeight(height);
@@ -38,6 +40,7 @@ public class BtnCheck extends Actor {
         this.box2 = box2;
         this.box3 = box3;
         this.box4 = box4;
+        this.item = item;
         this.player = player;
     }
 
@@ -75,6 +78,10 @@ public class BtnCheck extends Actor {
             if (box4.isCheck(player, box4)){
                 GameSc.box4Islooting = true;
                 log.info("НАЖАЛОСЬ4!!!!!");
+            }
+            if (item.isCheckItem(player, item)){
+                GameSc.pictureIslooting = true;
+                log.info("нажалось 5");
             }
             return true;
         }
