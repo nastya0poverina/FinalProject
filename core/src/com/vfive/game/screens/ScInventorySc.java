@@ -21,6 +21,7 @@ public class ScInventorySc implements Screen {
     BtnScBack btnBack;
     Stage stage;
     SecondFloorSc sc;
+    public ItemInventory item;
 
     public ScInventorySc(Main game, SecondFloorSc screen) {
         this.game = game;

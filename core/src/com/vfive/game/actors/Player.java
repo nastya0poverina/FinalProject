@@ -38,8 +38,8 @@ public class Player extends Actor {
         if (position.getX() + widthPlayer > Main.WIDTH) // право
             position.setX(Main.WIDTH - widthPlayer);
 
-        if (position.getX() - widthPlayer < 0) // лево
-            position.setX(widthPlayer);
+        if (position.getX() - widthPlayer / 2 < 0) // лево
+            position.setX(widthPlayer / 2);
 
         if (position.getY() + heightPlayer * 3 > Main.HEIGHT) // верх
             position.setY(Main.HEIGHT - heightPlayer * 3);

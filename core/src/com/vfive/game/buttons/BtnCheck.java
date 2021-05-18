@@ -11,6 +11,7 @@ import com.vfive.game.actors.Player;
 import com.vfive.game.graphisObj.ItemInventory;
 import com.vfive.game.graphisObj.WorldObj;
 import com.vfive.game.screens.GameSc;
+import com.vfive.game.screens.SecondFloorSc;
 
 import java.io.OutputStream;
 import java.io.PrintStream;
@@ -25,9 +26,10 @@ public class BtnCheck extends Actor {
     private static Logger log = Logger.getLogger(BtnCheck.class.getName());
 
     private Texture img;
-    WorldObj box1, box2, box3, box4;
+    WorldObj box1, box2, box3, box4, obj;
     ItemInventory item;
     Player player;
+    SecondFloorSc floorSc;
 
     public BtnCheck(Texture img, Main game, Point2D point2D, float height, float width, WorldObj box1, WorldObj box2, WorldObj box3, WorldObj box4,ItemInventory item, Player player) {
         addListener(new BtnCheckListener( game));
@@ -41,6 +43,18 @@ public class BtnCheck extends Actor {
         this.box3 = box3;
         this.box4 = box4;
         this.item = item;
+        this.player = player;
+    }
+
+    public BtnCheck(Texture img, Main game, Point2D point2D, float height, float width, WorldObj obj, Player player, SecondFloorSc screen) {
+        addListener(new BtnCheckScListener(game));
+        this.img = img;
+        setHeight(height);
+        setWidth(width);
+        setX(point2D.getX());
+        setY(point2D.getY());
+        floorSc = screen;
+        this.obj = obj;
         this.player = player;
     }
 
@@ -83,6 +97,8 @@ public class BtnCheck extends Actor {
                 GameSc.pictureIslooting = true;
                 log.info("нажалось 5");
             }
+
+
             return true;
         }
 
@@ -92,6 +108,22 @@ public class BtnCheck extends Actor {
 
         public void setTouch(boolean touch) {
             isTouch = touch;
+        }
+    }
+    public class BtnCheckScListener extends InputListener{
+
+        private Main game;
+        public BtnCheckScListener( Main game) {
+            this.game = game;
+        }
+
+        @Override
+        public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+            if (floorSc.hanger.isCheck(player, floorSc.hanger)){
+                SecondFloorSc.hangIsCheck = true;
+                floorSc.money.setTexture(Main.money_1);
+            }
+            return true;
         }
     }
 }

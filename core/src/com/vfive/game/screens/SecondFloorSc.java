@@ -6,10 +6,12 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.vfive.game.Main;
 import com.vfive.game.Tools.Joystick;
 import com.vfive.game.Tools.Point2D;
 import com.vfive.game.actors.Player;
+import com.vfive.game.buttons.BtnCheck;
 import com.vfive.game.buttons.BtnInventory;
 import com.vfive.game.graphisObj.WorldObj;
 
@@ -18,40 +20,50 @@ public class SecondFloorSc implements Screen {
     Main game;
     Joystick joystick;
     Player player;
+    Stage stage;
     BtnInventory btnInventory;
+    BtnCheck btnCheck;
     ScInventorySc inventorySc;
-    WorldObj money, cupboard, table;
+    public WorldObj money, cupboard, table, safe, hanger, key;
+    public static boolean hangIsCheck;
 
     public SecondFloorSc(Main game) {
         this.game = game;
         loadActor();
     }
 
-    public void loadActor(){
+    public void loadActor() {
 
         joystick = new Joystick(Main.circle, Main.actor, new Point2D(Main.WIDTH / 10 * 9, Main.HEIGHT / 10 * 2), Main.HEIGHT / 3);
         player = new Player(Main.human, new Point2D(Main.WIDTH / 2, Main.HEIGHT / 4), 5, Main.human.getWidth(), Main.human.getHeight());
 
         btnInventory = new BtnInventory(Main.btnInventory, game, new Point2D(Main.WIDTH / 10 * 9 - 100, Main.HEIGHT / 10 * 9 + 40), Main.btnInventory.getHeight() * 3, Main.btnInventory.getWidth() * 3);
-
+        btnCheck = new BtnCheck(Main.btnCheck, game, new Point2D(Main.WIDTH / 10 * 8 + Main.box.getWidth() / 2f, Main.HEIGHT / 10 * 4 + 50), 26f * 5, joystick.getSize(), hanger, player, this);
         inventorySc = new ScInventorySc(game, this);
 
         money = new WorldObj(Main.money_0, new Point2D(Main.WIDTH / 10 * 8 - 50, Main.HEIGHT / 10 * 9 + 50), Main.money_0.getWidth() * 2, Main.money_0.getHeight() * 2);
         cupboard = new WorldObj(Main.cupboard, new Point2D(Main.WIDTH / 10 * 3, Main.HEIGHT / 10 * 4), Main.cupboard.getWidth() * 3, Main.cupboard.getHeight() * 3);
-        table = new WorldObj(Main.table, new Point2D(Main.WIDTH / 10 * 7, Main.HEIGHT / 10 * 6), Main.table.getWidth() * 3, Main.table.getHeight() * 3);
+        table = new WorldObj(Main.table, new Point2D(Main.WIDTH / 10 * 5, Main.HEIGHT / 10 * 6), Main.table.getWidth() * 2, Main.table.getHeight() * 3);
+        safe = new WorldObj(Main.safeClose, new Point2D(Main.WIDTH / 10 * 7, Main.HEIGHT / 10 * 3), Main.safeClose.getWidth() * 3, Main.safeClose.getHeight() * 3);
+        hanger = new WorldObj(Main.hanger, new Point2D(Main.WIDTH / 10 * 8, Main.HEIGHT / 10 * 7), Main.hanger.getWidth() * 3, Main.hanger.getHeight() * 3);
+        key = new WorldObj(Main.key, new Point2D(Main.WIDTH / 10 * 3, Main.HEIGHT / 10 * 4), Main.key.getWidth() * 3, Main.key.getHeight() * 3);
 
-
+        stage = new Stage();
+        stage.addActor(btnCheck);
     }
 
-    public void gameRender(SpriteBatch batch){
+    public void gameRender(SpriteBatch batch) {
 
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
         money.draw(batch);
         btnInventory.draw(batch);
-        joystick.draw(batch);
-        cupboard.draw(batch);
+        key.draw(batch);
         table.draw(batch);
+        safe.draw(batch);
+        hanger.draw(batch);
+        cupboard.draw(batch);
+
 
         if (joystick.getDir().getX() == 0 && joystick.getDir().getY() == 0) {
             batch.draw(player.getIdle(), player.position.getX(), player.position.getY());
@@ -108,8 +120,26 @@ public class SecondFloorSc implements Screen {
             }
         });
 
-        cupboard.collides(player, cupboard);
         table.collides(player, table);
+        safe.collides(player, safe);
+        cupboard.cup_coll(player, cupboard);
+        key.collides(player, key);
+
+        objActions();
+
+        joystick.draw(batch);
+
+    }
+
+    public void objActions(){
+        if (hanger.isCheck(player, hanger)){
+            if (hangIsCheck == false){
+                stage.draw();
+                Gdx.input.setInputProcessor(stage);
+                joystick.returnStick();
+            }
+            hanger.collides(player, hanger);
+        }
     }
 
     public void touch(float x, float y, boolean isTouch, int pointer) {

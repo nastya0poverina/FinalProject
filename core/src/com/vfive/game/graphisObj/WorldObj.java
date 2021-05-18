@@ -82,11 +82,11 @@ public class WorldObj extends Actor {
 
     public void collides(Player player, WorldObj worldObj) {
         //проверяет столкновения обьекта с player
-        if (player.position.getX() < worldObj.getX() + worldObj.getWidth() / 2 &&          // правая стенка ящика
+        if (player.position.getX() < worldObj.getX() + worldObj.getWidth() / 2 + 5 &&          // правая стенка ящика
                 player.position.getX() > worldObj.getX() - worldObj.getWidth() / 2 &&
                 player.position.getY() < worldObj.getY() + worldObj.getHeight() / 2 - 5 &&
                 player.position.getY() > worldObj.getY() - worldObj.getHeight() / 2)
-            player.position.setX(worldObj.getX() + worldObj.getHeight() / 2);
+            player.position.setX(worldObj.getX() + worldObj.getHeight() / 2 + 5);
 
         if (player.position.getX() > worldObj.getX() - worldObj.getWidth() &&              //левая стенка ящика
                 player.position.getX() < worldObj.getX() + worldObj.getWidth() / 2 &&
@@ -95,9 +95,52 @@ public class WorldObj extends Actor {
             player.position.setX(worldObj.getX() - worldObj.getWidth());
 
         if (player.position.getY() + player.heightPlayer / 2 > worldObj.getY() - worldObj.getHeight() / 2 &&    // нижняя стенка ящика
+                player.position.getX() > worldObj.getX() - worldObj.getWidth()  &&
+                player.position.getY() < worldObj.getY() + worldObj.getHeight() / 2 - 5 &&
+                player.position.getX() < worldObj.getX() + worldObj.getWidth() / 2 - 5)
+            player.position.setY(worldObj.getY() - worldObj.getHeight() / 2 - player.heightPlayer / 2);
+
+        if (player.position.getY() < worldObj.getY() + worldObj.getHeight() / 2 &&                   //верхняя стенка ящика
                 player.position.getX() > worldObj.getX() - worldObj.getWidth() &&
                 player.position.getX() < worldObj.getX() + worldObj.getWidth() / 2 &&
-                player.position.getY() < worldObj.getY() + worldObj.getHeight() / 2 - 5)
+                player.position.getY() > worldObj.getY() - worldObj.getHeight() / 2)
+            player.position.setY(worldObj.getY() + worldObj.getHeight() / 2);
+    }
+
+    public void cup_coll(Player player, WorldObj worldObj) {
+        //проверяет столкновения обьекта с player
+        if (player.position.getX() < worldObj.getX() + worldObj.getWidth() / 2 + 5 &&          // правая стенка ящика
+                player.position.getX() > worldObj.getX() - worldObj.getWidth() / 2 &&
+                player.position.getY() < worldObj.getY() + worldObj.getHeight() / 2 - 5 &&
+                player.position.getY() > worldObj.getY() - worldObj.getHeight() / 2){
+
+            Point2D pos = worldObj.getPos();
+
+            player.position.setX(worldObj.getX() + worldObj.getWidth() / 2);
+            worldObj.setPosition(worldObj.getX() - 1, worldObj.getY());
+            if (worldObj.getX() < pos.getX() - worldObj.getWidth()) {
+                worldObj.setX(pos.getX() - worldObj.getWidth());
+            }
+        }
+
+        if (player.position.getX() > worldObj.getX() - worldObj.getWidth() + player.getWidth() &&              //левая стенка ящика
+                player.position.getX() < worldObj.getX() + worldObj.getWidth() / 2 &&
+                player.position.getY() < worldObj.getY() + worldObj.getHeight() / 2 - 5 &&
+                player.position.getY() > worldObj.getY() - worldObj.getHeight() / 2){
+
+            Point2D pos = worldObj.getPos();
+
+            player.position.setX(worldObj.getX() - worldObj.getWidth() + player.getWidth());
+            worldObj.setPosition(worldObj.getX() + 1, worldObj.getY());
+            if (worldObj.getPos().getX() > pos.getX() + worldObj.getWidth()){
+                worldObj.setX(pos.getX() + worldObj.getWidth());
+            }
+        }
+
+        if (player.position.getY() + player.heightPlayer / 2 > worldObj.getY() - worldObj.getHeight() / 2 &&    // нижняя стенка ящика
+                player.position.getX() > worldObj.getX() - worldObj.getWidth()  &&
+                player.position.getY() < worldObj.getY() + worldObj.getHeight() / 2 - 5 &&
+                player.position.getX() < worldObj.getX() + worldObj.getWidth() / 2 - 5)
             player.position.setY(worldObj.getY() - worldObj.getHeight() / 2 - player.heightPlayer / 2);
 
         if (player.position.getY() < worldObj.getY() + worldObj.getHeight() / 2 &&                   //верхняя стенка ящика
@@ -108,10 +151,10 @@ public class WorldObj extends Actor {
     }
 
     public boolean isCheck(Player player, WorldObj worldObj) {
-        if (player.position.getX() > worldObj.getX() - worldObj.getWidth() - 50 &&
-                player.position.getX() < worldObj.getX() + worldObj.getWidth() / 2 + 50 &&
-                player.position.getY() > worldObj.getY() - worldObj.getHeight() - 50 &&
-                player.position.getY() < worldObj.getY() + worldObj.getHeight() / 2 + 50)
+        if (player.position.getX() > worldObj.getX() - worldObj.getWidth() - 25 &&
+                player.position.getX() < worldObj.getX() + worldObj.getWidth() / 2 + 25 &&
+                player.position.getY() > worldObj.getY() - worldObj.getHeight() - 25 &&
+                player.position.getY() < worldObj.getY() + worldObj.getHeight() / 2 + 25)
             return true;
         return false;
     }

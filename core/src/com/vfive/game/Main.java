@@ -16,8 +16,6 @@ import java.util.List;
 import java.util.ListIterator;
 import java.util.logging.Logger;
 
-import javax.xml.soap.Text;
-
 public class Main extends Game  {
 
 	public static Logger logger = Logger.getLogger(Game.class.getName());
@@ -27,7 +25,7 @@ public class Main extends Game  {
 	public static int HEIGHT;
 	public static Texture circle, actor, btnPlay, backgroundRoom, human, box, scrap_paper, glue,
 			btnCheck, backgroundInventory, boxItem, btnInventory, player, btnBack, frame,
-			framePicture, glass, picture, prompt, backgroundRoom2, cupboard, table, key;
+			framePicture, glass, picture, prompt, backgroundRoom2, cupboard, table, key, safeClose, hanger, btnNext;
 	public static Texture money_0, money_1 ;
 	public static Inventory inventory;
 
@@ -62,9 +60,12 @@ public class Main extends Game  {
 		picture = new Texture("picture.png");
 		prompt = new Texture("prompt.png");
 		backgroundRoom2 = new Texture("background_floor_2.png");
-		cupboard = new Texture("cupboard.png");
+		cupboard = new Texture("Сupboard.png");
 		table = new Texture("table.png");
 		key = new Texture("key.png");
+		safeClose = new Texture("safe_close.png");
+		hanger = new Texture("hanger.png");
+		btnNext = new Texture("button_next.png");
 
 		setScreen(new MenuSc(this));
 	}

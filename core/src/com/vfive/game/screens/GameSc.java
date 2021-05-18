@@ -67,7 +67,7 @@ public class GameSc implements Screen {
 
         btnCheck = new BtnCheck(Main.btnCheck, menu, new Point2D(Main.WIDTH / 10 * 8 + Main.box.getWidth() / 2f, Main.HEIGHT / 10 * 4 + 50), 26f * 5, joystick.getSize(), box1, box2, box3, box4, inventorySc.picture, player);
         btnInventory = new BtnInventory(Main.btnInventory, menu, new Point2D(Main.WIDTH / 10 * 9 - 100, Main.HEIGHT / 10 * 9 + 40), Main.btnInventory.getHeight() * 3, Main.btnInventory.getWidth() * 3);
-        btnNext = new BtnNextFloor(Main.btnInventory, menu, new Point2D(Main.WIDTH / 2 , Main.HEIGHT / 10 * 9), 26f * 5, joystick.getSize(), player);
+        btnNext = new BtnNextFloor(Main.btnNext, menu, new Point2D(Main.WIDTH / 2 , Main.HEIGHT / 10 * 9), 26f * 5, joystick.getSize(), player);
 
         glue1 = new ItemInventory("GLUE", false, Main.glue, inventorySc.getBoxCentre(), inventorySc);
         inventorySc.getBoxCentre().setEmpty(false);
