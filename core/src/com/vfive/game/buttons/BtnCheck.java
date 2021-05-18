@@ -11,6 +11,7 @@ import com.vfive.game.actors.Player;
 import com.vfive.game.graphisObj.ItemInventory;
 import com.vfive.game.graphisObj.WorldObj;
 import com.vfive.game.screens.GameSc;
+import com.vfive.game.screens.ScInventorySc;
 import com.vfive.game.screens.SecondFloorSc;
 
 import java.io.OutputStream;
@@ -30,6 +31,7 @@ public class BtnCheck extends Actor {
     ItemInventory item;
     Player player;
     SecondFloorSc floorSc;
+    ScInventorySc inventorySc;
 
     public BtnCheck(Texture img, Main game, Point2D point2D, float height, float width, WorldObj box1, WorldObj box2, WorldObj box3, WorldObj box4,ItemInventory item, Player player) {
         addListener(new BtnCheckListener( game));
@@ -46,7 +48,7 @@ public class BtnCheck extends Actor {
         this.player = player;
     }
 
-    public BtnCheck(Texture img, Main game, Point2D point2D, float height, float width, WorldObj obj, Player player, SecondFloorSc screen) {
+    public BtnCheck(Texture img, Main game, Point2D point2D, float height, float width, WorldObj obj, Player player, SecondFloorSc screen, ScInventorySc inventory) {
         addListener(new BtnCheckScListener(game));
         this.img = img;
         setHeight(height);
@@ -56,6 +58,7 @@ public class BtnCheck extends Actor {
         floorSc = screen;
         this.obj = obj;
         this.player = player;
+        this.inventorySc = inventory;
     }
 
     @Override
@@ -121,7 +124,21 @@ public class BtnCheck extends Actor {
         public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
             if (floorSc.hanger.isCheck(player, floorSc.hanger)){
                 SecondFloorSc.hangIsCheck = true;
-                floorSc.money.setTexture(Main.money_1);
+                Main.moneySum = Main.moneySum + 1;
+            }
+            if (floorSc.key.isCheck(player, floorSc.key)){
+                SecondFloorSc.keyIsCheck = true;
+                inventorySc.key.setEquipped(true);
+            }
+            if (floorSc.safe.isCheck(player, floorSc.safe)){
+                SecondFloorSc.safeIsCheck = true;
+                floorSc.safe.setTexture(Main.safeOpen);
+                Main.moneySum = Main.moneySum + 2;
+            }
+            if (floorSc.cupboard.isCheck(player, floorSc.cupboard)){
+                SecondFloorSc.cupIsCheck = true;
+                inventorySc.table.setEquipped(true);
+                Main.moneySum = Main.moneySum + 1;
             }
             return true;
         }

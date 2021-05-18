@@ -21,7 +21,7 @@ public class ScInventorySc implements Screen {
     BtnScBack btnBack;
     Stage stage;
     SecondFloorSc sc;
-    public ItemInventory item;
+    public ItemInventory key, cupboard, table;
 
     public ScInventorySc(Main game, SecondFloorSc screen) {
         this.game = game;
@@ -84,6 +84,10 @@ public class ScInventorySc implements Screen {
 
         btnBack = new BtnScBack(Main.btnBack, game, p6, Main.btnBack.getHeight() * 5, Main.btnBack.getWidth() * 5, sc);
 
+        key = new ItemInventory("key", false, Main.key, boxLeft2, this);
+        cupboard = new ItemInventory("cup", false, Main.cupboard, boxLeft1, this);
+        table = new ItemInventory("molot", false, Main.picture, boxCentre, this);
+
         stage.addActor(btnBack);
         stage.addActor(boxInterFirst);
 
@@ -125,58 +129,67 @@ public class ScInventorySc implements Screen {
 
         btnBack.draw(batch);
 
+        if (key.getEquipped() == true) {
+            stage.addActor(key);
+        }
+        if (cupboard.getEquipped() == true){
+            stage.addActor(cupboard);
+        }
+        if (table.getEquipped() == true){
+            stage.addActor(btnBack);
+        }
         stage.draw();
         Gdx.input.setInputProcessor(stage);
     }
 
     public WorldObj getFreeBox() {
-        if (boxLeft2.getEmpty() == true){
+        if (boxLeft2.getEmpty() == true) {
             //boxLeft2.setEmpty(false);
             return boxLeft2;
         }
-        if (boxLeft1.getEmpty() == true){
+        if (boxLeft1.getEmpty() == true) {
             //boxLeft1.setEmpty(false);
             return boxLeft1;
         }
-        if (boxCentre.getEmpty() == true){
+        if (boxCentre.getEmpty() == true) {
             //boxCentre.setEmpty(false);
             return boxCentre;
         }
-        if (boxRight1.getEmpty() == true){
+        if (boxRight1.getEmpty() == true) {
             //boxRight1.setEmpty(false);
             return boxRight1;
         }
-        if (boxRight2.getEmpty() == true){
+        if (boxRight2.getEmpty() == true) {
             //boxRight2.setEmpty(false);
             return boxRight2;
         }
         return null;
     }
 
-    public WorldObj getFreeInterBox_setEmpty(){
+    public WorldObj getFreeInterBox_setEmpty() {
         if (boxInterFirst.getEmpty() == true) {
             boxInterFirst.setEmpty(false);
             return boxInterFirst;
         }
-        if (boxInterSecond.getEmpty() == true){
+        if (boxInterSecond.getEmpty() == true) {
             boxInterSecond.setEmpty(false);
             return boxInterSecond;
         }
         return null;
     }
 
-    public WorldObj getFreeInterBox(){
+    public WorldObj getFreeInterBox() {
         if (boxInterFirst.getEmpty() == true) {
             return boxInterFirst;
         }
-        if (boxInterSecond.getEmpty() == true){
+        if (boxInterSecond.getEmpty() == true) {
             return boxInterSecond;
         }
         return null;
     }
 
-    public WorldObj getResultBox(){
-        if (boxInterResult.getEmpty() == false){
+    public WorldObj getResultBox() {
+        if (boxInterResult.getEmpty() == false) {
             return boxInterResult;
         }
         return null;

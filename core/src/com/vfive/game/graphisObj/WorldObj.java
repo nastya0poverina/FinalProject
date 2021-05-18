@@ -113,13 +113,11 @@ public class WorldObj extends Actor {
                 player.position.getX() > worldObj.getX() - worldObj.getWidth() / 2 &&
                 player.position.getY() < worldObj.getY() + worldObj.getHeight() / 2 - 5 &&
                 player.position.getY() > worldObj.getY() - worldObj.getHeight() / 2){
-
             Point2D pos = worldObj.getPos();
-
             player.position.setX(worldObj.getX() + worldObj.getWidth() / 2);
             worldObj.setPosition(worldObj.getX() - 1, worldObj.getY());
-            if (worldObj.getX() < pos.getX() - worldObj.getWidth()) {
-                worldObj.setX(pos.getX() - worldObj.getWidth());
+            if (worldObj.getX() - worldObj.getWidth() < 0) {
+                worldObj.setX( worldObj.getWidth() );
             }
         }
 
@@ -132,8 +130,8 @@ public class WorldObj extends Actor {
 
             player.position.setX(worldObj.getX() - worldObj.getWidth() + player.getWidth());
             worldObj.setPosition(worldObj.getX() + 1, worldObj.getY());
-            if (worldObj.getPos().getX() > pos.getX() + worldObj.getWidth()){
-                worldObj.setX(pos.getX() + worldObj.getWidth());
+            if (worldObj.getX() > Main.WIDTH - worldObj.getWidth() * 4){
+                worldObj.setX( Main.WIDTH - worldObj.getWidth() * 4);
             }
         }
 
