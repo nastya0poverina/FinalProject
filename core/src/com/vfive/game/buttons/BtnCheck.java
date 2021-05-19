@@ -137,7 +137,9 @@ public class BtnCheck extends Actor {
             }
             if (floorSc.cupboard.isCheck(player, floorSc.cupboard)){
                 SecondFloorSc.cupIsCheck = true;
-                inventorySc.table.setEquipped(true);
+                inventorySc.hammer.setEquipped(true);
+            }
+            if (floorSc.table.isCheck(player, floorSc.table) && inventorySc.hammer.getEquipped() == true){
                 Main.moneySum = Main.moneySum + 1;
             }
             return true;

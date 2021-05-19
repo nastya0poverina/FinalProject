@@ -27,7 +27,7 @@ public class Main extends Game  {
 	public static Texture circle, actor, btnPlay, backgroundRoom, human, box, scrap_paper, glue,
 			btnCheck, backgroundInventory, boxItem, btnInventory, player, btnBack, frame,
 			framePicture, glass, picture, prompt, backgroundRoom2, cupboard, table, key, safeClose, hanger, btnNext, safeOpen;
-	public static Texture money_0, money_1, money_2, money_3, money_4, money_5 ;
+	public static Texture money_0, money_1, money_2, money_3, money_4, money_5, hammer;
 	public static Inventory inventory;
 
 
@@ -72,6 +72,7 @@ public class Main extends Game  {
 		hanger = new Texture("hanger.png");
 		btnNext = new Texture("button_next.png");
 		safeOpen = new Texture("safe_open.png");
+		hammer = new Texture("hammer.png");
 
 		setScreen(new MenuSc(this));
 	}

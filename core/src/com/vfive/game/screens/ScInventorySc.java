@@ -21,7 +21,7 @@ public class ScInventorySc implements Screen {
     BtnScBack btnBack;
     Stage stage;
     SecondFloorSc sc;
-    public ItemInventory key, cupboard, table;
+    public ItemInventory key, cupboard, hammer;
 
     public ScInventorySc(Main game, SecondFloorSc screen) {
         this.game = game;
@@ -86,7 +86,7 @@ public class ScInventorySc implements Screen {
 
         key = new ItemInventory("key", false, Main.key, boxLeft2, this);
         cupboard = new ItemInventory("cup", false, Main.cupboard, boxLeft1, this);
-        table = new ItemInventory("molot", false, Main.picture, boxCentre, this);
+        hammer = new ItemInventory("hammer", false, Main.hammer, boxCentre, this);
 
         stage.addActor(btnBack);
         stage.addActor(boxInterFirst);
@@ -135,8 +135,8 @@ public class ScInventorySc implements Screen {
         if (cupboard.getEquipped() == true){
             stage.addActor(cupboard);
         }
-        if (table.getEquipped() == true){
-            stage.addActor(btnBack);
+        if (hammer.getEquipped() == true){
+            stage.addActor(hammer);
         }
         stage.draw();
         Gdx.input.setInputProcessor(stage);

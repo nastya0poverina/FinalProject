@@ -45,7 +45,7 @@ public class ItemInventory extends Actor {
         this.setHeight(box.getHeight() - box.getHeight() / 10f * 2);
         this.setX(box.getX() - box.getWidth() / 2 + box.getWidth() / 10f);
         this.setY(box.getY() - box.getHeight() / 2 + box.getHeight() / 10f);
-        addListener(new ItemListener(this, box));
+        addListener(new ItemSecondListener(this, box));
     }
 
     @Override
@@ -96,9 +96,8 @@ public class ItemInventory extends Actor {
 
         @Override
         public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-            Main.logger.info("а нажатий то нету");
 
-           /* if (item.inInterBox == false && inventorySc.getBoxInterFirst().getEmpty() == true) {
+            if (item.inInterBox == false && inventorySc.getBoxInterFirst().getEmpty() == true) {
                 Main.logger.info("ьы в 1 коробке с результатом");
                 //item.setEquipped(false);
                 Point2D point2D = new Point2D(inventorySc.getBoxInterFirst().getX() - inventorySc.getBoxInterFirst().getWidth() / 2 + inventorySc.getBoxInterFirst().getWidth() / 10f,
@@ -159,7 +158,7 @@ public class ItemInventory extends Actor {
                 Main.logger.info(" картина на стене ");
                 item.setEquipped(true);
                 GameSc.isPictureOnWall = true;
-            }*/
+            }
             return true;
         }
     }
@@ -176,7 +175,9 @@ public class ItemInventory extends Actor {
         @Override
         public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
 
-            if (item.inInterBox == false && inventorySecond.getBoxInterFirst().getEmpty() == true) {
+            Main.logger.info("а нажатий то нету");
+
+            /*if (item.inInterBox == false && inventorySecond.getBoxInterFirst().getEmpty() == true) {
                 Main.logger.info("ьы в 1 коробке с результатом");
                 //item.setEquipped(false);
                 Point2D point2D = new Point2D(inventorySecond.getBoxInterFirst().getX() - inventorySecond.getBoxInterFirst().getWidth() / 2 + inventorySecond.getBoxInterFirst().getWidth() / 10f,
@@ -230,8 +231,8 @@ public class ItemInventory extends Actor {
                 item.setPos(point2D);
                 inventorySecond.getBoxInterSecond().setEmpty(true);
                 item.inInterBox = false;
-                inventorySecond.getFreeBox().setEmpty(false);
-            }
+                inventorySecond.getFreeBox().setEmpty(false);*/
+
             return true;
         }
     }

@@ -25,7 +25,7 @@ public class SecondFloorSc implements Screen {
     BtnCheck btnCheck;
     ScInventorySc inventorySc;
     public WorldObj money, cupboard, table, safe, hanger, key;
-    public static boolean hangIsCheck, keyIsCheck, safeIsCheck, cupIsCheck, tableIsCheck;
+    public static boolean hangIsCheck, keyIsCheck, safeIsCheck, cupIsCheck, hammerIsCheck;
 
     public SecondFloorSc(Main game) {
         this.game = game;
@@ -191,14 +191,13 @@ public class SecondFloorSc implements Screen {
             cupboard.cup_coll(player, cupboard);
         }
         if (table.isCheck(player, table)) {
-            if (tableIsCheck == false && inventorySc.table.getEquipped() == false){
+            if (hammerIsCheck == false && inventorySc.hammer.getEquipped() == false){
                 stage.draw();
                 Gdx.input.setInputProcessor(stage);
                 joystick.returnStick();
             }
             table.isCheck(player, table);
         }
-
     }
 
     public void touch(float x, float y, boolean isTouch, int pointer) {
