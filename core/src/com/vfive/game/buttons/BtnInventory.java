@@ -13,7 +13,6 @@ import com.vfive.game.screens.InventorySc;
 import java.util.logging.Logger;
 
 public class BtnInventory extends Actor {
-    private static Logger log = Logger.getLogger(BtnCheck.class.getName());
 
     private Texture btnImage;
 
@@ -23,25 +22,9 @@ public class BtnInventory extends Actor {
         setWidth(width);
         setX(point2D.getX());
         setY(point2D.getY());
-        // addListener(new BtnInventoryListener(game));
     }
 
     public void draw(Batch batch) {
         batch.draw(btnImage, this.getX(), this.getY() , this.getWidth(), this.getHeight());
     }
-
-    /*private class BtnInventoryListener extends InputListener{
-        private Main game;
-
-        public BtnInventoryListener(Main game) {
-            this.game = game;
-        }
-
-        @Override
-        public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-            game.setScreen(new InventorySc(game));
-            log.info("est kasanie");
-            return true;
-        }
-    }*/
 }

@@ -16,16 +16,11 @@ public class BtnStart extends Actor {
     public BtnStart(Texture img, Main game ) {
         addListener(new BtnListener(game));
         this.img = img;
-        setHeight(Main.btnPlay.getHeight());
-        setWidth(Main.btnPlay.getWidth());
+        setHeight(Main.btnPlay.getHeight() * 4);
+        setWidth(Main.btnPlay.getWidth() * 4);
         setX(Main.WIDTH / 2f - this.getWidth() / 2f);
         setY(Main.HEIGHT / 2f - this.getHeight() / 2f);
     }
-
-
-    /*public void draw(Batch batch) {
-        batch.draw(img, this.getX(), this.getY() , this.getWidth(), this.getHeight());
-    }*/
 
     @Override
     public void draw(Batch batch, float parentAlpha) {

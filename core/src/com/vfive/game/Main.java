@@ -26,7 +26,9 @@ public class Main extends Game  {
 	public static int moneySum = 0;
 	public static Texture circle, actor, btnPlay, backgroundRoom, human, box, scrap_paper, glue,
 			btnCheck, backgroundInventory, boxItem, btnInventory, player, btnBack, frame,
-			framePicture, glass, picture, prompt, backgroundRoom2, cupboard, table, key, safeClose, hanger, btnNext, safeOpen;
+			framePicture, glass, picture, prompt, backgroundRoom2, cupboard, key, safeClose, hanger,
+			btnNext, safeOpen, mathes, win, tapAgain;
+	public static Texture tableLC, tableLCM, tableLCC, tableLCCM;
 	public static Texture money_0, money_1, money_2, money_3, money_4, money_5, hammer;
 	public static Inventory inventory;
 
@@ -41,7 +43,7 @@ public class Main extends Game  {
 		HEIGHT = Gdx.graphics.getHeight();
 		circle = new Texture("circle.png");
 		actor = new Texture("circle.png");
-		btnPlay = new Texture("start.png");
+		btnPlay = new Texture("btnStart.png");
 		backgroundRoom = new Texture("background_room.jpg");
 		human = new Texture("sprite.png");
 		box = new Texture("box1.png");
@@ -51,7 +53,7 @@ public class Main extends Game  {
 		backgroundInventory = new Texture("backgroundInventory.jpg");
 		boxItem = new Texture("boxitem.png");
 		btnInventory = new Texture("button_inventory.png");
-		money_0 = new Texture("money_0.png");
+		money_0 = new Texture("money_ 0.png");
 		money_1 = new Texture("money_ 1.png");
 		money_2 = new Texture("money_ 2.png");
 		money_3 = new Texture("money_ 3.png");
@@ -66,24 +68,21 @@ public class Main extends Game  {
 		prompt = new Texture("prompt.png");
 		backgroundRoom2 = new Texture("background_floor_2.png");
 		cupboard = new Texture("Сupboard.png");
-		table = new Texture("table.png");
 		key = new Texture("key.png");
 		safeClose = new Texture("safe_close.png");
 		hanger = new Texture("hanger.png");
 		btnNext = new Texture("button_next.png");
 		safeOpen = new Texture("safe_open.png");
 		hammer = new Texture("hammer.png");
+		tableLC = new Texture("laptop_and_candle.png");
+		tableLCM = new Texture("laptop_and_candle_melt.png");
+		tableLCC = new Texture("laptop_crush_and_candle.png");
+		tableLCCM = new Texture("laptop_crush_and_candle_melt.png");
+		mathes = new Texture("matches.png");
+		win = new Texture("win.png");
+		tapAgain = new Texture("again.png");
 
 		setScreen(new MenuSc(this));
-	}
-
-	public static float getObjectRadius(Texture object){
-		float radius = 0;
-		if (object.getWidth() > object.getHeight())
-			radius = object.getWidth();
-		if (object.getWidth() < object.getHeight())
-			radius = object.getHeight();
-		return radius;
 	}
 
 	@Override

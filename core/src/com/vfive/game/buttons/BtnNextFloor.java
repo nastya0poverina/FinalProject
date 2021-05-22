@@ -12,8 +12,8 @@ import com.vfive.game.screens.SecondFloorSc;
 
 public class BtnNextFloor extends Actor {
 
-    Texture texture;
-    Player player;
+    private Texture texture;
+    private Player player;
 
     public BtnNextFloor(Texture texture, Main game, Point2D point2D, float height, float width, Player player) {
         this.texture = texture;
@@ -26,24 +26,10 @@ public class BtnNextFloor extends Actor {
 
     @Override
     public void draw(Batch batch, float parentAlpha) {
-        batch.draw(texture, this.getX() + this.getWidth(), this.getY() + this.getHeight(), this.getWidth(), this.getHeight());
+        batch.draw(texture, this.getX() , this.getY() , this.getWidth(), this.getHeight());
     }
 
     public void btnDraw(Batch batch){
         batch.draw(texture, this.getX(), this.getY() , this.getWidth(), this.getHeight());
-    }
-
-    public class NextListener extends InputListener{
-        Main game;
-
-        public NextListener(Main game) {
-            this.game = game;
-        }
-
-        @Override
-        public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-            game.setScreen(new SecondFloorSc(game));
-            return true;
-        }
     }
 }

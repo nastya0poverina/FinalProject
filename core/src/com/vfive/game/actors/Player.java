@@ -50,10 +50,6 @@ public class Player extends Actor {
         position.add(direction.getX() * speed, direction.getY() * speed);
     }
 
-    public Rectangle getBounds() {
-        return bounds;
-    }
-
     public Texture getIdle() {
         return idle;
     }
@@ -64,5 +60,9 @@ public class Player extends Actor {
 
     public void setDirection(Point2D dir) {
         this.direction = dir;
+    }
+
+    public float getWidthPlayer() {
+        return widthPlayer;
     }
 }

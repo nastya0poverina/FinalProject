@@ -1,33 +1,25 @@
 package com.vfive.game.screens;
 
-import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
-import com.badlogic.gdx.graphics.GL20;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.vfive.game.Main;
 import com.vfive.game.Tools.Point2D;
 import com.vfive.game.buttons.BtnBack;
-import com.vfive.game.buttons.BtnInventory;
 import com.vfive.game.graphisObj.ItemInventory;
 import com.vfive.game.graphisObj.WorldObj;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.logging.Logger;
-
 public class InventorySc implements Screen {
 
-    Main game;
+    private Main game;
     public WorldObj boxCentre, boxRight1, boxRight2, boxLeft1, boxLeft2;
     public WorldObj boxInterFirst, boxInterSecond, boxInterResult;
-    float boxWidth, boxHeight;
-    Point2D p1, p2, p3, p4, p5, p6, p7, p8, p9;
-    BtnBack btnBack;
-    Stage stage;
-    GameSc screen;
+    private float boxWidth, boxHeight;
+    private Point2D p1, p2, p3, p4, p5, p6, p7, p8, p9;
+    private BtnBack btnBack;
+    private Stage stage;
+    private GameSc screen;
     public ItemInventory prompt, picture;
 
     public InventorySc(Main game, GameSc screen) {
@@ -88,13 +80,12 @@ public class InventorySc implements Screen {
         boxInterFirst = new WorldObj(Main.boxItem, p7, boxWidth, boxHeight);
         boxInterSecond = new WorldObj(Main.boxItem, p8, boxWidth, boxHeight);
         boxInterResult = new WorldObj(Main.boxItem, p9, boxWidth, boxHeight);
-        prompt = new ItemInventory("PROMPT", false, Main.prompt, boxInterResult, this);
-        picture = new ItemInventory("PICTURE", false, Main.picture, boxInterResult, this);
+        prompt = new ItemInventory(false, Main.prompt, boxInterResult, this);
+        picture = new ItemInventory(false, Main.picture, boxInterResult, this);
 
         btnBack = new BtnBack(Main.btnBack, game, p6, Main.btnBack.getHeight() * 5, Main.btnBack.getWidth() * 5, screen);
 
         stage.addActor(btnBack);
-        stage.addActor(boxInterFirst);
 
         boxCentre.setEmpty(true);
         boxRight1.setEmpty(true);
@@ -134,23 +125,16 @@ public class InventorySc implements Screen {
 
         btnBack.draw(batch);
 
-        if (GameSc.glue1.getEquipped() == true) {
-            stage.addActor(GameSc.glue1);
-        }
-        if (GameSc.paper1.getEquipped() == true) {
-            stage.addActor(GameSc.paper1);
-        }
-        if (GameSc.frame1.getEquipped() == true){
-            stage.addActor(GameSc.frame1);
-        }
-        if (GameSc.glass1.getEquipped() == true){
-            stage.addActor(GameSc.glass1);
-        }
-        if (prompt.getEquipped() == true){
+        if (GameSc.glue1.getEquipped()) stage.addActor(GameSc.glue1);
+        if (GameSc.paper1.getEquipped()) stage.addActor(GameSc.paper1);
+        if (GameSc.frame1.getEquipped()) stage.addActor(GameSc.frame1);
+        if (GameSc.glass1.getEquipped()) stage.addActor(GameSc.glass1);
+
+        if (prompt.getEquipped()) {
             stage.addActor(prompt);
             prompt.inInterBox = true;
         }
-        if (picture.getEquipped() == true){
+        if (picture.getEquipped()) {
             stage.addActor(picture);
             picture.inInterBox = true;
         }
@@ -159,60 +143,16 @@ public class InventorySc implements Screen {
     }
 
     public WorldObj getFreeBox() {
-        if (boxLeft2.getEmpty() == true){
-            //boxLeft2.setEmpty(false);
-            return boxLeft2;
-        }
-        if (boxLeft1.getEmpty() == true){
-            //boxLeft1.setEmpty(false);
-            return boxLeft1;
-        }
-        if (boxCentre.getEmpty() == true){
-            //boxCentre.setEmpty(false);
-            return boxCentre;
-        }
-        if (boxRight1.getEmpty() == true){
-            //boxRight1.setEmpty(false);
-            return boxRight1;
-        }
-        if (boxRight2.getEmpty() == true){
-            //boxRight2.setEmpty(false);
-            return boxRight2;
-        }
-        return null;
+        if (boxLeft2.getEmpty()) return boxLeft2;
+        if (boxLeft1.getEmpty()) return boxLeft1;
+        if (boxCentre.getEmpty()) return boxCentre;
+        if (boxRight1.getEmpty()) return boxRight1;
+        if (!boxRight2.getEmpty()) return null;
+        return boxRight2;
     }
 
-    public WorldObj getFreeInterBox_setEmpty(){
-        if (boxInterFirst.getEmpty() == true) {
-           boxInterFirst.setEmpty(false);
-            return boxInterFirst;
-        }
-        if (boxInterSecond.getEmpty() == true){
-            boxInterSecond.setEmpty(false);
-            return boxInterSecond;
-        }
-        return null;
-    }
-
-    public WorldObj getFreeInterBox(){
-        if (boxInterFirst.getEmpty() == true) {
-            return boxInterFirst;
-        }
-        if (boxInterSecond.getEmpty() == true){
-            return boxInterSecond;
-        }
-        return null;
-    }
-
-    public WorldObj getResultBox(){
-        if (boxInterResult.getEmpty() == false){
-            return boxInterResult;
-        }
-        return null;
-    }
-
-    public ItemInventory conversionBoxInter(){
-        if (GameSc.glue1.inInterBox == true && GameSc.paper1.inInterBox == true){
+    public void conversionBoxInter() {
+        if (GameSc.glue1.inInterBox && GameSc.paper1.inInterBox) {
             boxInterResult.setEmpty(false);
             prompt.setEquipped(true);
             GameSc.glue1.setEquipped(false);
@@ -223,7 +163,7 @@ public class InventorySc implements Screen {
             stage.addActor(btnBack);
             stage.addActor(prompt);
         }
-        if (GameSc.glass1.inInterBox == true && GameSc.frame1.inInterBox == true){
+        if (GameSc.glass1.inInterBox && GameSc.frame1.inInterBox) {
             boxInterResult.setEmpty(false);
             picture.setEquipped(true);
             GameSc.frame1.setEquipped(false);
@@ -234,25 +174,22 @@ public class InventorySc implements Screen {
             stage.addActor(btnBack);
             stage.addActor(picture);
         }
-        if (GameSc.glue1.inInterBox == true && GameSc.glass1.inInterBox == true){
+        if (GameSc.glue1.inInterBox && GameSc.glass1.inInterBox) {
             GameSc.glue1.setEquipped(false);
             GameSc.glass1.setEquipped(false);
         }
-        if (GameSc.glue1.inInterBox == true && GameSc.frame1.inInterBox == true){
+        if (GameSc.glue1.inInterBox && GameSc.frame1.inInterBox) {
             GameSc.glue1.setEquipped(false);
             GameSc.frame1.setEquipped(false);
         }
-        if (GameSc.paper1.inInterBox == true && GameSc.glass1.inInterBox == true){
+        if (GameSc.paper1.inInterBox && GameSc.glass1.inInterBox) {
             GameSc.glass1.setEquipped(false);
             GameSc.paper1.setEquipped(false);
         }
-        if (GameSc.paper1.inInterBox == true && GameSc.frame1.inInterBox == true){
+        if (GameSc.paper1.inInterBox && GameSc.frame1.inInterBox) {
             GameSc.frame1.setEquipped(false);
             GameSc.paper1.setEquipped(false);
         }
-
-        //Main.logger.info("мы тут но все плохо");
-        return null;
     }
 
     public WorldObj getBoxCentre() {
@@ -261,10 +198,6 @@ public class InventorySc implements Screen {
 
     public WorldObj getBoxRight1() {
         return boxRight1;
-    }
-
-    public WorldObj getBoxRight2() {
-        return boxRight2;
     }
 
     public WorldObj getBoxLeft1() {
@@ -286,5 +219,4 @@ public class InventorySc implements Screen {
     public WorldObj getBoxInterResult() {
         return boxInterResult;
     }
-
 }

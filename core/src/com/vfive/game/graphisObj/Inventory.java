@@ -24,23 +24,4 @@ public class Inventory {
             //item.index = i;
         }
     }
-
-    public void removeItem(int index) {
-        if (items[index] != null)
-            items[index] = null;
-    }
-
-    public ItemInventory getItem(int index) {
-        return items[index];
-    }
-
-    public boolean isEmpty(int index) {
-        return items[index] == null;
-    }
-
-    public void clear() {
-        for (int i = 0; i < SUM_SLOTS; i++) {
-            removeItem(i);
-        }
-    }
 }

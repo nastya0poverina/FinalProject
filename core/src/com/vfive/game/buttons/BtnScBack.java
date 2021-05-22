@@ -13,7 +13,6 @@ import com.vfive.game.screens.SecondFloorSc;
 import java.util.logging.Logger;
 
 public class BtnScBack extends Actor {
-    private static Logger log = Logger.getLogger(BtnCheck.class.getName());
 
     private Texture btnImage;
     private SecondFloorSc screen;
@@ -26,13 +25,11 @@ public class BtnScBack extends Actor {
         setX(point2D.getX());
         setY(point2D.getY());
         addListener(new BtnBackListener(game, screen));
-
     }
 
     public void draw(Batch batch) {
         batch.draw(btnImage, this.getX(), this.getY() , this.getWidth(), this.getHeight());
     }
-
 
     private class BtnBackListener extends InputListener {
         private Main game;
@@ -46,7 +43,6 @@ public class BtnScBack extends Actor {
         @Override
         public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
             game.setScreen(screen);
-            //log.info("est kasanie");
             return true;
         }
     }

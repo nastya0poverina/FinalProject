@@ -12,7 +12,6 @@ import com.vfive.game.screens.GameSc;
 import java.util.logging.Logger;
 
 public class BtnBack extends Actor {
-    private static Logger log = Logger.getLogger(BtnCheck.class.getName());
 
     private Texture btnImage;
     private GameSc screen;
@@ -32,7 +31,6 @@ public class BtnBack extends Actor {
         batch.draw(btnImage, this.getX(), this.getY() , this.getWidth(), this.getHeight());
     }
 
-
     private class BtnBackListener extends InputListener {
         private Main game;
         private GameSc screen;
@@ -45,7 +43,6 @@ public class BtnBack extends Actor {
         @Override
         public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
             game.setScreen(screen);
-            //log.info("est kasanie");
             return true;
         }
     }

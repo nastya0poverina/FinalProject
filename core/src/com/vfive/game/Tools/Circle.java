@@ -2,7 +2,7 @@ package com.vfive.game.Tools;
 
 public class Circle {
 
-    float radius;
+    private float radius;
     public Point2D pos;
 
     public Circle(Point2D pos, float radius) {

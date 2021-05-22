@@ -8,12 +8,12 @@ import com.badlogic.gdx.scenes.scene2d.InputListener;
 
 public class Joystick {
 
-    Texture circleImg, stickImg;
-    Circle circleBound, stickBound, circleBound1;
+    private Texture circleImg, stickImg;
+    private Circle circleBound, stickBound, circleBound1;
     float circleRadius, stickRadius;
     Point2D direction;
     private int pointer = -1;
-    float size;
+    private float size;
 
 
     public Joystick(Texture cImg, Texture sImg, Point2D point2D, float size) {
@@ -42,22 +42,16 @@ public class Joystick {
                 stickRadius * 2);
     }
 
-
     public void update(float x, float y, boolean isTouch, int pointer) {
         // расположение stickImg в circleImg
         Point2D touch = new Point2D(x, y);
         // когда мы не касались джостика
-        if (circleBound1.isContains(touch) && isTouch && this.pointer == -1) {
-            this.pointer = pointer;
-        }
+        if (circleBound1.isContains(touch) && isTouch && this.pointer == -1) this.pointer = pointer;
         // когда мы касаемся джостика
-        if (circleBound1.overlaps(stickBound) && isTouch && this.pointer == this.pointer) {
+        if (circleBound1.overlaps(stickBound) && isTouch && this.pointer == this.pointer)
             work(new Point2D(x, y));
-        }
         // stickImg выходит за границы circleImg
-        if ((!isTouch && pointer == this.pointer)  || (isTouch && this.pointer == this.pointer && !circleBound1.isContains(touch))) {
-            returnStick();
-        }
+        if ((!isTouch && pointer == this.pointer) || (isTouch && this.pointer == this.pointer && !circleBound1.isContains(touch))) returnStick();
     }
 
     public void work(Point2D point2D) {
