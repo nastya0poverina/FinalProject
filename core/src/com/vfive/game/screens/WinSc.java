@@ -19,7 +19,7 @@ public class WinSc implements Screen {
 
     public WinSc(Main game) {
         this.game = game;
-        win = new WorldObj(Main.win, new Point2D(Main.WIDTH / 2f - Main.win.getWidth() / 2f, Main.HEIGHT / 2f + Main.win.getHeight() / 2f), Main.win.getWidth() * 3, Main.win.getHeight() * 3 );
+        win = new WorldObj(Main.win, new Point2D(Main.WIDTH  / 2f, Main.HEIGHT / 2f), Main.win.getWidth(), Main.win.getHeight());
     }
 
     @Override

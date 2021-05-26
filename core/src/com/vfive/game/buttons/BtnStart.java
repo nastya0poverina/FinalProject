@@ -16,8 +16,8 @@ public class BtnStart extends Actor {
     public BtnStart(Texture img, Main game ) {
         addListener(new BtnListener(game));
         this.img = img;
-        setHeight(Main.btnPlay.getHeight() * 4);
-        setWidth(Main.btnPlay.getWidth() * 4);
+        setHeight((Main.HEIGHT / 19f) * 6);
+        setWidth((Main.WIDTH / 17.3f) * 6);
         setX(Main.WIDTH / 2f - this.getWidth() / 2f);
         setY(Main.HEIGHT / 2f - this.getHeight() / 2f);
     }

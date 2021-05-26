@@ -35,7 +35,7 @@ public class WorldObj {
     }
 
     public void draw(SpriteBatch batch) {
-        //вычитаем radius т.к. отрисовка начинается с левого нижнего угла, а нам надо с середины обьекта
+        //вычитаем длину и ширину т.к. отрисовка начинается с левого нижнего угла, а нам надо с середины обьекта
         batch.draw(img, this.getX() - this.getWidth() / 2, this.getY() - this.getHeight() / 2, this.getWidth(), this.getHeight());
     }
 

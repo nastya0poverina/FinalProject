@@ -83,7 +83,7 @@ public class InventorySc implements Screen {
         prompt = new ItemInventory(false, Main.prompt, boxInterResult, this);
         picture = new ItemInventory(false, Main.picture, boxInterResult, this);
 
-        btnBack = new BtnBack(Main.btnBack, game, p6, Main.btnBack.getHeight() * 5, Main.btnBack.getWidth() * 5, screen);
+        btnBack = new BtnBack(Main.btnBack, game, p6, Main.HEIGHT / 13.5f, Main.WIDTH / 6.8f, screen);
 
         stage.addActor(btnBack);
 
@@ -99,18 +99,18 @@ public class InventorySc implements Screen {
 
     public void loadPos() {
 
-        boxWidth = Main.boxItem.getWidth() * 3;
-        boxHeight = Main.boxItem.getHeight() * 3;
+        boxWidth = Main.WIDTH / 10f;
+        boxHeight = boxWidth;
 
         p1 = new Point2D(Main.WIDTH / 2f, Main.HEIGHT / 10f * 7.5f);
         p2 = new Point2D(Main.WIDTH / 2f + boxWidth * 1.5f, Main.HEIGHT / 10f * 7.5f);
         p3 = new Point2D(Main.WIDTH / 2f + boxWidth * 3, Main.HEIGHT / 10f * 7.5f);
         p4 = new Point2D(Main.WIDTH / 2f - boxWidth * 1.5f, Main.HEIGHT / 10f * 7.5f);
         p5 = new Point2D(Main.WIDTH / 2f - boxWidth * 3, Main.HEIGHT / 10f * 7.5f);
-        p6 = new Point2D(Main.WIDTH / 10f * 1f, Main.HEIGHT / 10f * 1f);
-        p7 = new Point2D(Main.WIDTH / 2f - boxWidth * 2.5f, Main.HEIGHT / 10f * 4);
+        p6 = new Point2D(Main.WIDTH / 10f * 2f, Main.HEIGHT / 10f * 1f);
+        p7 = new Point2D(Main.WIDTH / 2f - boxWidth * 2f, Main.HEIGHT / 10f * 4);
         p8 = new Point2D(Main.WIDTH / 2f, Main.HEIGHT / 10f * 4);
-        p9 = new Point2D(Main.WIDTH / 2f + boxWidth * 2.5f, Main.HEIGHT / 10f * 4);
+        p9 = new Point2D(Main.WIDTH / 2f + boxWidth * 2f, Main.HEIGHT / 10f * 4);
     }
 
     public void renderDraw(SpriteBatch batch) {

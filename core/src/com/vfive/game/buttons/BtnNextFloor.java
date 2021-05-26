@@ -26,10 +26,10 @@ public class BtnNextFloor extends Actor {
 
     @Override
     public void draw(Batch batch, float parentAlpha) {
-        batch.draw(texture, this.getX() , this.getY() , this.getWidth(), this.getHeight());
+        batch.draw(texture,this.getX() - this.getWidth() / 2, this.getY() - this.getHeight() / 2, this.getWidth(), this.getHeight());
     }
 
     public void btnDraw(Batch batch){
-        batch.draw(texture, this.getX(), this.getY() , this.getWidth(), this.getHeight());
+        batch.draw(texture,this.getX() - this.getWidth() / 2, this.getY() - this.getHeight() / 2, this.getWidth(), this.getHeight());
     }
 }

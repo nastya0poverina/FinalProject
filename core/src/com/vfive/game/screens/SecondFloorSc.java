@@ -40,22 +40,22 @@ public class SecondFloorSc implements Screen {
         joystick = new Joystick(Main.circle, Main.actor, new Point2D(Main.WIDTH / 10f * 9, Main.HEIGHT / 10f * 2), Main.HEIGHT / 3f);
         player = new Player(Main.human, new Point2D(Main.WIDTH / 2f, Main.HEIGHT / 4f), 5, Main.human.getWidth(), Main.human.getHeight());
 
-        btnInventory = new BtnInventory(Main.btnInventory, game, new Point2D(Main.WIDTH / 10f * 9 - 100, Main.HEIGHT / 10f * 9 + 40), Main.btnInventory.getHeight() * 3, Main.btnInventory.getWidth() * 3);
-        btnCheck = new BtnCheck(Main.btnCheck, game, new Point2D(Main.WIDTH / 10f * 8 + Main.box.getWidth() / 2f, Main.HEIGHT / 10f * 4 + 50), 26f * 5, joystick.getSize(), hanger, player, this, inventorySc);
-        btnNext = new BtnNextFloor(Main.btnNext, game, new Point2D(Main.WIDTH / 2f - Main.btnNext.getWidth() * 2, Main.HEIGHT / 10f * 9), 26f * 5, joystick.getSize(), player);
+        btnInventory = new BtnInventory(Main.btnInventory, game, new Point2D(Main.WIDTH  - ((Main.HEIGHT / 12.4f) * 4) / 2 - 50, Main.HEIGHT / 10f * 9 ), (Main.WIDTH / 100.5f) * 4, (Main.HEIGHT / 12.4f) * 4);
+        btnCheck = new BtnCheck(Main.btnCheck, game, new Point2D(Main.WIDTH / 10f * 9, Main.HEIGHT / 10f * 2 + Main.HEIGHT / 3f / 2 + 50), Main.WIDTH / 15.5f, Main.HEIGHT / 3f, hanger, player, this, inventorySc);
+        btnNext = new BtnNextFloor(Main.btnNext, game, new Point2D(Main.WIDTH / 2f, Main.HEIGHT / 10f * 9), Main.WIDTH / 15.5f, Main.HEIGHT / 3f, player);
 
-        money = new WorldObj(Main.money_0, new Point2D(Main.WIDTH / 10f * 8 - 50, Main.HEIGHT / 10f * 9 + 70), Main.money_0.getWidth() * 2, Main.money_0.getHeight() * 2);
-        cupboard = new WorldObj(Main.cupboard, new Point2D(Main.WIDTH / 10f* 3, Main.HEIGHT / 10f * 4), Main.cupboard.getWidth() * 3, Main.cupboard.getHeight() * 3);
-        table = new WorldObj(Main.tableLC, new Point2D(Main.WIDTH / 10f * 5, Main.HEIGHT / 10f * 6), Main.tableLC.getWidth() * 3, Main.tableLC.getHeight() * 3);
-        safe = new WorldObj(Main.safeClose, new Point2D(Main.WIDTH / 10f * 7, Main.HEIGHT / 10f * 3), Main.safeClose.getWidth() * 3, Main.safeClose.getHeight() * 3);
-        hanger = new WorldObj(Main.hanger, new Point2D(Main.WIDTH / 10f * 8, Main.HEIGHT / 10f * 7), Main.hanger.getWidth() * 3, Main.hanger.getHeight() * 3);
-        key = new WorldObj(Main.key, new Point2D(Main.WIDTH / 10f * 3, Main.HEIGHT / 10f * 4), Main.key.getWidth() * 2, Main.key.getHeight() * 2);
+        money = new WorldObj(Main.money_0, new Point2D(btnInventory.getX() - btnInventory.getWidth() / 2 - 50 - Main.HEIGHT / 4f / 2 , Main.HEIGHT / 10f * 9 ),Main.HEIGHT / 4f, (Main.WIDTH / 100.5f) * 3);
+        cupboard = new WorldObj(Main.cupboard, new Point2D(Main.WIDTH / 10f* 3, Main.HEIGHT / 10f * 4), Main.WIDTH / 6.9f, Main.HEIGHT / 3.8f);
+        table = new WorldObj(Main.tableLC, new Point2D(Main.WIDTH / 10f * 5, Main.HEIGHT / 10f * 6), Main.HEIGHT / 7.3f, Main.HEIGHT / 7.3f);
+        safe = new WorldObj(Main.safeClose, new Point2D(Main.WIDTH / 10f * 7, Main.HEIGHT / 10f * 3), Main.HEIGHT / 7.3f, Main.HEIGHT / 7.3f);
+        hanger = new WorldObj(Main.hanger, new Point2D(Main.WIDTH / 10f * 8, Main.HEIGHT / 10f * 7), Main.HEIGHT / 7.3f, Main.HEIGHT / 7.3f);
+        key = new WorldObj(Main.key, new Point2D(Main.WIDTH / 10f * 3, Main.HEIGHT / 10f * 4), Main.WIDTH / 34.6f, Main.HEIGHT / 19f);
 
         stage = new Stage();
         stage.addActor(btnCheck);
 
-        money.setHeight(money.getTexture().getHeight() * 3);
-        money.setWidth(money.getTexture().getWidth() * 3);
+/*        money.setHeight(money.getTexture().getHeight() * 3);
+        money.setWidth(money.getTexture().getWidth() * 3);*/
     }
 
     public void gameRender(SpriteBatch batch) {

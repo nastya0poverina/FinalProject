@@ -12,7 +12,6 @@ import com.vfive.game.Tools.Point2D;
 public class Player extends Actor {
 
     public Point2D position;
-    private Rectangle bounds;
     public float widthPlayer, heightPlayer;
     private float speed;
     private Animation animation;
@@ -26,7 +25,6 @@ public class Player extends Actor {
         widthPlayer = widthAct;
         heightPlayer = heightAct;
         animation = new Animation(new TextureRegion(img), 3, 0.5f);
-        bounds = new Rectangle(position.getX(), position.getY(), img.getWidth() / 3f, img.getHeight());
         direction = new Point2D(0.0F, 0.0F);
         idle = Main.player;
     }
@@ -35,17 +33,17 @@ public class Player extends Actor {
         animation.update(dt);
 
         //ставим проверку что бы обьект не вылетал за экран, а только касался его границ
-        if (position.getX() + widthPlayer > Main.WIDTH) // право
-            position.setX(Main.WIDTH - widthPlayer);
+        if (position.getX() + Main.WIDTH  / 13.25f + widthPlayer / 4 > Main.WIDTH) // право
+            position.setX(Main.WIDTH - Main.WIDTH  / 13.25f - widthPlayer / 4);
 
-        if (position.getX() - widthPlayer / 2 < 0) // лево
-            position.setX(widthPlayer / 2);
+        if (position.getX() - Main.WIDTH  / 13.25f < 0) // лево
+            position.setX(Main.WIDTH  / 13.25f);
 
-        if (position.getY() + heightPlayer * 3 > Main.HEIGHT) // верх
-            position.setY(Main.HEIGHT - heightPlayer * 3);
+        if (position.getY() + Main.HEIGHT / 4.7f + widthPlayer / 4   > Main.HEIGHT) // верх
+            position.setY(Main.HEIGHT - Main.HEIGHT / 4.7f - widthPlayer  / 4 );
 
-        if (position.getY() - heightPlayer < 0)  // низ
-            position.setY(heightPlayer);
+        if (position.getY() - Main.HEIGHT / 13f < 0)  // низ
+            position.setY(Main.HEIGHT / 13f);
 
         position.add(direction.getX() * speed, direction.getY() * speed);
     }

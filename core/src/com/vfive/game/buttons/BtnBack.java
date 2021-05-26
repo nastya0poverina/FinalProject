@@ -21,8 +21,8 @@ public class BtnBack extends Actor {
         this.screen = screen;
         setHeight(height);
         setWidth(width);
-        setX(point2D.getX());
-        setY(point2D.getY());
+        setX(point2D.getX() - this.getWidth() / 2);
+        setY(point2D.getY() - this.getHeight() / 2);
         addListener(new BtnBackListener(game, screen));
 
     }

@@ -36,8 +36,8 @@ public class BtnCheck extends Actor {
         this.img = img;
         setHeight(height);
         setWidth(width);
-        setX(point2D.getX());
-        setY(point2D.getY());
+        setX(point2D.getX() - this.getWidth() / 2);
+        setY(point2D.getY() - this.getHeight() / 2);
         this.box1 = box1;
         this.box2 = box2;
         this.box3 = box3;
@@ -51,8 +51,8 @@ public class BtnCheck extends Actor {
         this.img = img;
         setHeight(height);
         setWidth(width);
-        setX(point2D.getX());
-        setY(point2D.getY());
+        setX(point2D.getX() - this.getWidth() / 2);
+        setY(point2D.getY() - this.getHeight() / 2);
         floorSc = screen;
         this.obj = obj;
         this.player = player;
@@ -61,7 +61,7 @@ public class BtnCheck extends Actor {
 
     @Override
     public void draw(Batch batch, float parentAlpha) {
-        batch.draw(img, this.getX(), this.getY(), this.getWidth(), this.getHeight());
+        batch.draw(img, this.getX() , this.getY(), this.getWidth(), this.getHeight());
     }
 
     private class BtnCheckListener extends InputListener {

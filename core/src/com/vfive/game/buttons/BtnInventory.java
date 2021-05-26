@@ -20,11 +20,11 @@ public class BtnInventory extends Actor {
         this.btnImage = btnImage;
         setHeight(height);
         setWidth(width);
-        setX(point2D.getX());
-        setY(point2D.getY());
+        setX(point2D.getX() - this.getWidth() / 2);
+        setY(point2D.getY() - this.getHeight() / 2);
     }
 
     public void draw(Batch batch) {
-        batch.draw(btnImage, this.getX(), this.getY() , this.getWidth(), this.getHeight());
+        batch.draw(btnImage, this.getX(), this.getY(), this.getWidth(), this.getHeight());
     }
 }
